@@ -10,16 +10,31 @@ public class PrototypeMotorTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
+    /*
+    //Spliced code
+
     private DcMotor leftMotors = null;
     private DcMotor rightMotors = null;
 
     private DcMotor wheelRotate = null;
     private DcMotor mastLift = null;
+    */
+
+    //Unspliced code
+
+    private DcMotor leftFront = null;
+    private DcMotor rightFront = null;
+    private DcMotor leftBack = null;
+    private DcMotor rightBack = null;
+
 
     @Override
     public void init() {
 
         telemetry.addData("Status", "Initializing");
+
+        /*
+        //Spliced code
 
         leftMotors = hardwareMap.get(DcMotor.class, "leftMotors");
         rightMotors = hardwareMap.get(DcMotor.class, "rightMotors");
@@ -32,6 +47,20 @@ public class PrototypeMotorTest extends OpMode {
 
         wheelRotate.setDirection(DcMotor.Direction.FORWARD);
         wheelRotate.setDirection(DcMotor.Direction.FORWARD);
+        */
+
+        //Unspliced code
+
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+
+        leftFront.setDirection(DcMotor.Direction.FORWARD);
+        leftBack.setDirection(DcMotor.Direction.FORWARD);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
+
 
         telemetry.addData("Status", "Initialized");
     }
@@ -57,23 +86,35 @@ public class PrototypeMotorTest extends OpMode {
         double drive = gamepad1.left_trigger - gamepad1.right_trigger;
         double turn = gamepad1.left_stick_x;
 
-        double wheels = gamepad1.right_stick_y;
-        double mastPower = gamepad1.right_stick_x;
-
         leftMotorPower = Range.clip(drive + turn, -1.0, 1.0) ;
         rightMotorPower = Range.clip(drive - turn, -1.0, 1.0) ;
+
+        //Unspliced code
+
+        leftFront.setPower(leftMotorPower);
+        rightFront.setPower(rightMotorPower);
+        leftBack.setPower(leftMotorPower);
+        rightBack.setPower(rightMotorPower);
+
+
+        /*
+        //Spliced code
+
+        double wheels = gamepad1.right_stick_y;
+        double mastPower = gamepad1.right_stick_x;
 
         leftMotors.setPower(leftMotorPower);
         rightMotors.setPower(rightMotorPower);
 
         wheelRotate.setPower(wheels);
         mastLift.setPower(mastPower);
+        */
         }
 
     @Override
     public void stop() {
 
-        telemetry.addData("Status", "Running");
+        telemetry.addData("Status", "Stopped");
     }
 
 }
