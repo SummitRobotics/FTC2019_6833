@@ -1,3 +1,6 @@
+
+/**
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -32,9 +35,6 @@ public class AutoProgram extends OpMode
     final double liftGearRatio = 1; // This is < 1.0 if geared up
     final double liftCountsPerRot = (hexCoreRevCounts * liftGearRatio);
 
-    /*
-     * Code to run ONCE when the driver hits INIT
-     */
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
@@ -57,24 +57,15 @@ public class AutoProgram extends OpMode
         telemetry.addData("Status", "Initialized");
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-     */
     @Override
     public void init_loop() {
     }
 
-    /*
-     * Code to run ONCE when the driver hits PLAY
-     */
     @Override
     public void start() {
         runtime.reset();
     }
 
-    /*
-     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-     */
     @Override
     public void loop() {
         if (taskCount == 0) { // Landing
@@ -98,9 +89,6 @@ public class AutoProgram extends OpMode
         telemetry.addData("Task", taskCount + "." + subTaskCount);
     }
 
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
     @Override
     public void stop() {
         // Stop all motion;
@@ -112,3 +100,5 @@ public class AutoProgram extends OpMode
     }
 
 }
+
+**/

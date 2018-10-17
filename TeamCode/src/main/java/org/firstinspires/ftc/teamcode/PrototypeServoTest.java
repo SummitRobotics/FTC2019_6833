@@ -4,23 +4,25 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="PrototypeMotorTest", group="Iterative Opmode")
-public class PrototypeMotorTest extends OpMode {
+@TeleOp(name="PrototypeServoTest", group="Iterative Opmode")
+public class PrototypeServoTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private DcMotor testMotor = null;
-
+    private ServoToggle testToggle = null;
+    private Servo testServo = null;
 
     @Override
     public void init() {
 
         telemetry.addData("Status", "Initializing");
 
-        testMotor = hardwareMap.get(DcMotor.class, "testMotor");
+        testServo = new hardwareMap(Servo.class, "testServo");
+        testToggle = new ServoToggle(testServo, .4, .6);
 
         telemetry.addData("Status", "Initialized");
     }
@@ -40,14 +42,8 @@ public class PrototypeMotorTest extends OpMode {
 
         telemetry.addData("Status", "Running");
 
-        double power;
-
-        double drive = gamepad1.left_trigger - gamepad1.right_trigger;
-
-        power = Range.clip(drive, -1.0, 1.0) ;
-
-        testMotor.setPower(power);
-        }
+        testToggle.setServoState(gamepad1.a);
+    }
 
     @Override
     public void stop() {

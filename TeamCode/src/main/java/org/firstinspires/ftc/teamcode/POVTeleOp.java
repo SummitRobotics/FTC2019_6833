@@ -50,7 +50,7 @@ public class POVTeleOp extends OpMode{
         double turn = gamepad1.left_stick_x;
         double lift = gamepad1.right_stick_y;
         double mast =  gamepad2.left_trigger - gamepad2.right_trigger;
-        
+
         handToggle.setServoState(gamepad2.a);
         leftMinToggle.setServoState(gamepad2.x);
         rightMinToggle.setServoState(gamepad2.b);
