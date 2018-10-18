@@ -4,34 +4,46 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class ServoToggle {
 
-    Servo servo;
-    double[] poses = new double[2];
-    boolean lastState;
-    int flip = 0;
+    // Declare variables
+    private Servo servo;
+    private double[] positions = new double[2];
+    private boolean lastState;
+    private int posIndex = 0;
 
     public ServoToggle(Servo servo, double pos1, double pos2) {
 
-        poses[0] = pos1;
-        poses[1] = pos2;
+        // Set up toggle positions and other variables
+        positions[0] = pos1;
+        positions[1] = pos2;
 
         this.servo = servo;
         this.lastState = false;
     }
 
-    public void setServoState(boolean currentState) {
+    /**
+     * Method to toggle the servo between two positions based on input from a button.
+     * @param buttonDown The button being used for input.
+     */
+    public void setServoState(boolean buttonDown) {
 
-        servo.setPosition(poses[this.flop(currentState)]);
+        servo.setPosition(positions[this.checkIfToggle(buttonDown)]);
     }
 
-    private int flop(boolean currentState) {
+    /**
+     * Method to change the position being returned only if the button is pressed once. Holding
+     *          down the button will do nothing.
+     * @param buttonDown The button beign used for input.
+     * @return The index of the selected position.
+     */
+    private int checkIfToggle(boolean buttonDown) {
 
-        if (currentState && !lastState) {
+        if (buttonDown && !lastState) {
 
-            flip = 1 - flip;
+            posIndex = 1 - posIndex;
         }
 
-        lastState = currentState;
+        lastState = buttonDown;
 
-        return flip;
+        return posIndex;
     }
 }

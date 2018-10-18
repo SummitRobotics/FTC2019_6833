@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Hardware {
-    // Declare OpMode members.
+    // Declare Hardware members.
     DcMotor leftDrive = null;
     DcMotor rightDrive = null;
     DcMotor frontLift = null;
@@ -21,7 +21,8 @@ public class Hardware {
     final double HD_HEX_REV_COUNTS = 1120; // 1120 for 40:1, 560 for 20:1
     final double DRIVE_GEAR_RATIO = 1; // This is < 1.0 if geared up
     final double WHEEL_CIRCUMFERENCE = 6 * 3.1415;
-    final double DRIVE_COUNTS_PER_INCH = (HD_HEX_REV_COUNTS * DRIVE_GEAR_RATIO * WHEEL_CIRCUMFERENCE);
+    final double DRIVE_COUNTS_PER_INCH = (HD_HEX_REV_COUNTS * DRIVE_GEAR_RATIO *
+            WHEEL_CIRCUMFERENCE);
 
 
     final double HEX_CORE_REV_COUNTS = 288;
@@ -48,7 +49,7 @@ public class Hardware {
         leftMineralClamp = hwMap.get(Servo.class, "leftMineralClamp");
         rightMineralClamp = hwMap.get(Servo.class, "rightMineralClamp");
 
-        // Reverse the motor that runs backwards
+        // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         frontLift.setDirection(DcMotor.Direction.FORWARD);

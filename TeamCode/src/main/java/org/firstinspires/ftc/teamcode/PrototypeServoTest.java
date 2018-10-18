@@ -21,8 +21,8 @@ public class PrototypeServoTest extends OpMode {
 
         telemetry.addData("Status", "Initializing");
 
-        testServo = new hardwareMap(Servo.class, "testServo");
-        testToggle = new ServoToggle(testServo, .4, .6);
+        testServo = hardwareMap.get(Servo.class, "testServo");
+        testToggle = new ServoToggle(testServo, .3, .7);
 
         telemetry.addData("Status", "Initialized");
     }
