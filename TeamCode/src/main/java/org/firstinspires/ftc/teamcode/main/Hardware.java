@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.main;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -6,14 +6,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Hardware {
     // Declare Hardware members.
-    DcMotor leftDrive = null;
-    DcMotor rightDrive = null;
-    DcMotor frontLift = null;
-    DcMotor backLift = null;
-    DcMotor mastLift = null;
-    Servo handRotate = null;
-    Servo leftMineralClamp = null;
-    Servo rightMineralClamp = null;
+    public DcMotor leftDrive = null;
+    public DcMotor rightDrive = null;
+    public DcMotor frontLift = null;
+    public DcMotor backLift = null;
+    public DcMotor mastLift = null;
+    public Servo handRotate = null;
+    public Servo leftMineralClamp = null;
+    public Servo rightMineralClamp = null;
 
 
     // Prepare variables for encoder use

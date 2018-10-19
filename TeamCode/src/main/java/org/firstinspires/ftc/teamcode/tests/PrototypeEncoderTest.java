@@ -1,28 +1,26 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="PrototypeServoTest", group="Iterative Opmode")
-public class PrototypeServoTest extends OpMode {
+@TeleOp(name="PrototypeEncoderTest", group="Iterative Opmode")
+public class PrototypeEncoderTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private ServoToggle testToggle = null;
-    private Servo testServo = null;
+    private DcMotor testMotor = null;
+
 
     @Override
     public void init() {
 
         telemetry.addData("Status", "Initializing");
 
-        testServo = hardwareMap.get(Servo.class, "testServo");
-        testToggle = new ServoToggle(testServo, .3, .7);
+        testMotor = hardwareMap.get(DcMotor.class, "testMotor");
 
         telemetry.addData("Status", "Initialized");
     }
@@ -42,7 +40,10 @@ public class PrototypeServoTest extends OpMode {
 
         telemetry.addData("Status", "Running");
 
-        testToggle.setServoState(gamepad1.a);
+        testMotor.setTargetPosition(500);
+
+        telemetry.addData("Is Busy", testMotor.isBusy());
+        telemetry.addData("CurrentLocation", testMotor.getCurrentPosition());
     }
 
     @Override
