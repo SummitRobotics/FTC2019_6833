@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.main.BasicHardware;
 
-public class CoreAuto {
+public abstract class CoreAuto {
 
     private ElapsedTime runtime = new ElapsedTime();
     BasicHardware robot = new BasicHardware();

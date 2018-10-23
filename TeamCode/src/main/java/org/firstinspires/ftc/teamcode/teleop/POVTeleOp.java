@@ -14,9 +14,9 @@ public class POVTeleOp extends OpMode{
     private ElapsedTime runtime = new ElapsedTime();
 
     // Declare servo toggles for each servo.
-    private ServoToggle handToggle;
-    private ServoToggle leftMinToggle;
-    private ServoToggle rightMinToggle;
+    //private ServoToggle handToggle;
+    //private ServoToggle leftMinToggle;
+    //private ServoToggle rightMinToggle;
 
 
     @Override
@@ -26,9 +26,9 @@ public class POVTeleOp extends OpMode{
 
         // Initialize all hardware and servo toggles
         robot.init(hardwareMap);
-        handToggle = new ServoToggle(robot.handRotate, 0.0, 1.0);
-        leftMinToggle = new ServoToggle(robot.leftMineralClamp, 0.4, 0.6);
-        rightMinToggle = new ServoToggle(robot.rightMineralClamp, 0.4, 0.6);
+        //handToggle = new ServoToggle(robot.handRotate, 0.0, 1.0);
+        //leftMinToggle = new ServoToggle(robot.leftMineralClamp, 0.4, 0.6);
+        //rightMinToggle = new ServoToggle(robot.rightMineralClamp, 0.4, 0.6);
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -57,9 +57,9 @@ public class POVTeleOp extends OpMode{
         double mast =  gamepad2.left_trigger - gamepad2.right_trigger;
 
         // Get toggled inputs
-        handToggle.setServoState(gamepad2.a);
-        leftMinToggle.setServoState(gamepad2.x);
-        rightMinToggle.setServoState(gamepad2.b);
+        //handToggle.setServoState(gamepad2.a);
+        //leftMinToggle.setServoState(gamepad2.x);
+        //rightMinToggle.setServoState(gamepad2.b);
 
         // Set power variables
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
@@ -74,7 +74,7 @@ public class POVTeleOp extends OpMode{
         robot.rightDrive.setPower(rightPower);
         robot.frontLift.setPower(liftPower);
         robot.backLift.setPower(liftPower);
-        robot.mastLift.setPower(mastPower);
+        //robot.mastLift.setPower(mastPower);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
