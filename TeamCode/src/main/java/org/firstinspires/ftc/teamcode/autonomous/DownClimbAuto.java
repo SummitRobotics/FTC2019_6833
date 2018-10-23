@@ -8,13 +8,9 @@ public class DownClimbAuto {
 
     BasicHardware robot = new BasicHardware();
 
-    BasicHardware ahwMap;
-
-    DownClimbAuto(com.qualcomm.robotcore.hardware.HardwareMap hwMap, BasicHardware ahwMap) {
+    DownClimbAuto(com.qualcomm.robotcore.hardware.HardwareMap hwMap) {
 
         robot.init(hwMap);
-
-        this.ahwMap = ahwMap;
     }
 
     public void run() throws InterruptedException {

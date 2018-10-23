@@ -31,29 +31,29 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.main.BasicHardware;
 
-public abstract class CoreAuto {
+public class CoreAuto extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     BasicHardware robot = new BasicHardware();
 
-    HardwareMap hwMap;
-
     DownClimbAuto downClimb  = null;
 
-    CoreAuto(HardwareMap hwMap) {
+    CoreAuto() {
 
-        this.hwMap = hwMap;
-        robot.init(hwMap);
+        robot.init(hardwareMap);
 
-        downClimb = new DownClimbAuto(hwMap, robot);
+        downClimb = new DownClimbAuto(hardwareMap);
 
     }
 
     public void runOpMode() throws InterruptedException {
 
         downClimb.run();
+
+
     }
 }
