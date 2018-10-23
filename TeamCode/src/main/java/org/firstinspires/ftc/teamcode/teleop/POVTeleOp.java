@@ -5,12 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.main.Hardware;
+import org.firstinspires.ftc.teamcode.main.BasicHardware;
 
 @TeleOp(name="POVTeleOp", group="Iterative Opmode")
 public class POVTeleOp extends OpMode{
 
-    Hardware robot = new Hardware();
+    BasicHardware robot = new BasicHardware();
     private ElapsedTime runtime = new ElapsedTime();
 
     // Declare servo toggles for each servo.
