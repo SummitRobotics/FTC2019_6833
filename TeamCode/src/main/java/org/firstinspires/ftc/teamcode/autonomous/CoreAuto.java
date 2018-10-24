@@ -40,13 +40,14 @@ public abstract class CoreAuto extends LinearOpMode{
         }
     }
 
-    public void encoderMove(double speed, int ticks, int mode) {
+    public void encoderMove(double speed, int inches, int mode) {
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
-            robot.leftDrive.setTargetPosition(mode * ticks);
-            robot.rightDrive.setTargetPosition(ticks);
+            int ticks = inches * robot.DRIVE_COUNTS_PER_INCH;
+            robot.leftDrive.setTargetPosition(ticks);
+            robot.rightDrive.setTargetPosition(mode * ticks);
 
             // Turn On RUN_TO_POSITION
             robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);

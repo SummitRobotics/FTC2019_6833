@@ -14,15 +14,15 @@ public class Hardware {
 
     // Prepare variables for encoder use
     // http://www.revrobotics.com/content/docs/Encoder-Guide.pdf
-    public final double HD_HEX_REV_COUNTS = 1120; // 1120 for 40:1, 560 for 20:1
-    public final double DRIVE_GEAR_RATIO = 1; // This is < 1.0 if geared up
-    public final double WHEEL_CIRCUMFERENCE = 6 * 3.1415;
-    public final double DRIVE_COUNTS_PER_INCH = (HD_HEX_REV_COUNTS * DRIVE_GEAR_RATIO *
+    private final double HD_HEX_REV_COUNTS = 1120; // 1120 for 40:1, 560 for 20:1
+    private final double DRIVE_GEAR_RATIO = 72/125; // This is < 1.0 if geared up
+    private final double WHEEL_CIRCUMFERENCE = 6 * 3.1415;
+    public final int DRIVE_COUNTS_PER_INCH = (int) (HD_HEX_REV_COUNTS * DRIVE_GEAR_RATIO *
             WHEEL_CIRCUMFERENCE);
 
 
-    public final double HEX_CORE_REV_COUNTS = 288;
-    public final double LIFT_GEAR_RATIO = 1; // This is < 1.0 if geared up
+    private final double HEX_CORE_REV_COUNTS = 288;
+    private final double LIFT_GEAR_RATIO = 1; // This is < 1.0 if geared up
     public final double LIFT_COUNTS_PER_ROT = (HEX_CORE_REV_COUNTS * LIFT_GEAR_RATIO);
 
     // Local OpMode members
