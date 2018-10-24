@@ -1,15 +1,14 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="PrototypeServoTest", group="Iterative Opmode")
-public class PrototypeServoTest extends OpMode {
+import org.firstinspires.ftc.teamcode.teleop.ServoToggle;
+
+@TeleOp(name="ProtoServoTest", group="Iterative Opmode")
+public class ProtoServoTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 

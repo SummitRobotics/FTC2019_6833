@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -24,9 +24,10 @@ public class ServoToggle {
      * Method to toggle the servo between two positions based on input from a button.
      * @param buttonDown The button being used for input.
      */
-    public void setServoState(boolean buttonDown) {
+    public double setServoState(boolean buttonDown) {
 
         servo.setPosition(positions[this.checkIfToggle(buttonDown)]);
+        return positions[this.checkIfToggle(buttonDown)];
     }
 
     /**

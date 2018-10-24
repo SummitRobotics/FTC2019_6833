@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="PrototypeMotorTest", group="Iterative Opmode")
-public class PrototypeMotorTest extends OpMode {
+@TeleOp(name="ProtoMotorTest", group="Iterative Opmode")
+public class ProtoMotorTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -20,7 +20,7 @@ public class PrototypeMotorTest extends OpMode {
 
         telemetry.addData("Status", "Initializing");
 
-        testMotor = hardwareMap.get(DcMotor.class, "testMotor");
+        testMotor = hardwareMap.get(DcMotor.class, "test");
 
         telemetry.addData("Status", "Initialized");
     }
