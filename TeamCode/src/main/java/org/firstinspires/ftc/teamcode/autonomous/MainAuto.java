@@ -23,7 +23,7 @@ public class MainAuto extends CoreAuto {
         path[1] = new PVector(1915, 696);
         path[2] = new PVector(4454, -61);
 
-        encoderLift(1.0, 5);
+        // encoderLift(1.0, 5);
 
         runPath(path);
 

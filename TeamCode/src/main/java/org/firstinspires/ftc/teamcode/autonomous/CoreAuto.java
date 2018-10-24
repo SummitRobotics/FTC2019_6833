@@ -5,47 +5,54 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 import org.firstinspires.ftc.teamcode.main.PVector;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public abstract class CoreAuto extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
 
-    public void encoderLift(double speed, int rotations) {
-
-        int liftTarget = robot.liftArm.getCurrentPosition() + rotations * (int)robot.LIFT_COUNTS_PER_ROT; // 2 needs to be replaced with # of rotations
-
-        robot.liftArm.setTargetPosition(liftTarget);
-        robot.liftArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.liftArm.setPower(speed); // test power val
-
-        while (robot.liftArm.isBusy()) {
-
-            // Display it for the driver.
-            telemetry.addData("Path1",  "Running to %7d", liftTarget);
-            telemetry.addData("Path2",  "Running at %7d :%7d",
-                    robot.liftArm.getCurrentPosition());
-            telemetry.update();
-        }
-
-        robot.liftArm.setPower(0);
-
-        robot.liftArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
+//    public void encoderLift(double speed, int rotations) {
+//
+//        int liftTarget = robot.liftArm.getCurrentPosition() + rotations * (int)robot.LIFT_COUNTS_PER_ROT; // 2 needs to be replaced with # of rotations
+//
+//        robot.liftArm.setTargetPosition(liftTarget);
+//        robot.liftArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.liftArm.setPower(speed); // test power val
+//
+//        while (robot.liftArm.isBusy()) {
+//
+//            // Display it for the driver.
+//            telemetry.addData("Path1",  "Running to %7d", liftTarget);
+//            telemetry.addData("Path2",  "Running at %7d :%7d",
+//                    robot.liftArm.getCurrentPosition());
+//            telemetry.update();
+//        }
+//
+//        robot.liftArm.setPower(0);
+//
+//        robot.liftArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//    }
 
     public void runPath(PVector[] path) {
         for (PVector move : path) {
-            encoderMove(0.7, move.t, -1);
-            encoderMove(0.7, move.r, 1);
+
+            if (move.servo == null) {
+                encoderMove(0.7, move.t, -1);
+                encoderMove(0.7, move.r, 1);
+            } else if (move.servo == null) {
+
+                servoMove(move.servo, move.r);
+            }
         }
     }
 
-    public void encoderMove(double speed, int inches, int mode) {
+    public void encoderMove(double speed, double inches, int mode) {
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
-            int ticks = inches * robot.DRIVE_COUNTS_PER_INCH;
+            int ticks =(int)(inches * robot.DRIVE_COUNTS_PER_INCH);
             robot.leftDrive.setTargetPosition(ticks);
             robot.rightDrive.setTargetPosition(mode * ticks);
 
@@ -80,5 +87,10 @@ public abstract class CoreAuto extends LinearOpMode{
 
             //  sleep(250);   // optional pause after each move
         }
+    }
+
+    public void servoMove(Servo servo, double goTo) {
+
+        servo.setPosition(goTo);
     }
 }

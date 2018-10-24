@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.teleop.ServoToggle;
-
 @TeleOp(name="ProtoServoTest", group="Iterative Opmode")
 public class ProtoServoTest extends OpMode {
 

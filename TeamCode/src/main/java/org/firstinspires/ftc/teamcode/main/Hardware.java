@@ -8,7 +8,7 @@ public class Hardware {
     // Declare Hardware members.
     public DcMotor leftDrive = null;
     public DcMotor rightDrive = null;
-    public DcMotor liftArm = null;
+    // public DcMotor liftArm = null;
     public Servo markerDrop = null;
 
 
@@ -38,14 +38,14 @@ public class Hardware {
         //Init hardware
         leftDrive = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
-        liftArm = hwMap.get(DcMotor.class, "liftArm");
+        // liftArm = hwMap.get(DcMotor.class, "liftArm");
         markerDrop = hwMap.get(Servo.class, "markerDrop");
 
 
         // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        liftArm.setDirection(DcMotor.Direction.FORWARD);
+        // liftArm.setDirection(DcMotor.Direction.FORWARD);
         markerDrop.setPosition(0.5);
     }
 }
