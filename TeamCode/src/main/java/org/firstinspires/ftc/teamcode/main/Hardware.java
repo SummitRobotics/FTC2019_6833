@@ -8,12 +8,7 @@ public class Hardware {
     // Declare Hardware members.
     public DcMotor leftDrive = null;
     public DcMotor rightDrive = null;
-    public DcMotor frontLift = null;
-    public DcMotor backLift = null;
-    //public DcMotor mastLift = null;
-    //public Servo handRotate = null;
-    //public Servo leftMineralClamp = null;
-    //public Servo rightMineralClamp = null;
+    public DcMotor liftArm = null;
     public Servo markerDrop = null;
 
 
@@ -43,24 +38,14 @@ public class Hardware {
         //Init hardware
         leftDrive = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
-        frontLift = hwMap.get(DcMotor.class, "frontLift");
-        backLift = hwMap.get(DcMotor.class, "backLift");
-        //mastLift = hwMap.get(DcMotor.class, "mastLift");
-        //handRotate = hwMap.get(Servo.class, "handRotate");
-        //leftMineralClamp = hwMap.get(Servo.class, "leftMineralClamp");
-        //rightMineralClamp = hwMap.get(Servo.class, "rightMineralClamp");
+        liftArm = hwMap.get(DcMotor.class, "liftArm");
         markerDrop = hwMap.get(Servo.class, "markerDrop");
 
 
         // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        frontLift.setDirection(DcMotor.Direction.FORWARD);
-        backLift.setDirection(DcMotor.Direction.FORWARD);
-        //mastLift.setDirection(DcMotor.Direction.FORWARD);
-        //handRotate.setPosition(0.5);
-        //leftMineralClamp.setPosition(0.5);
-        //rightMineralClamp.setPosition(0.5);
+        liftArm.setDirection(DcMotor.Direction.FORWARD);
         markerDrop.setPosition(0.5);
     }
 }

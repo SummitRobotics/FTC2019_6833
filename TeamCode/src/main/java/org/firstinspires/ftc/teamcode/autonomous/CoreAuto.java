@@ -20,38 +20,29 @@ public abstract class CoreAuto extends LinearOpMode{
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
 
-    public void encoderLift(double speed, int degrees) {
+    public void encoderLift(double speed, int rotations) {
 
         robot.leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         robot.rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        int frontTarget = robot.frontLift.getCurrentPosition() + degrees * (int)robot.LIFT_COUNTS_PER_ROT; // 2 needs to be replaced with # of rotations
-        int backTarget = robot.backLift.getCurrentPosition() + degrees * (int)robot.LIFT_COUNTS_PER_ROT; // 2 needs to be replaced with # of rotations
+        int liftTarget = robot.liftArm.getCurrentPosition() + rotations * (int)robot.LIFT_COUNTS_PER_ROT; // 2 needs to be replaced with # of rotations
 
-        robot.backLift.setTargetPosition(backTarget);
-        robot.frontLift.setTargetPosition(frontTarget);
+        robot.liftArm.setTargetPosition(liftTarget);
+        robot.liftArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.liftArm.setPower(speed); // test power val
 
-        robot.backLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.frontLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        robot.backLift.setPower(speed); // test power val
-        robot.frontLift.setPower(speed); // test power val
-
-        while (robot.frontLift.isBusy() && robot.backLift.isBusy()) {
+        while (robot.liftArm.isBusy()) {
 
             // Display it for the driver.
-            telemetry.addData("Path1",  "Running to %7d :%7d", frontTarget,  backTarget);
+            telemetry.addData("Path1",  "Running to %7d", liftTarget);
             telemetry.addData("Path2",  "Running at %7d :%7d",
-                    robot.frontLift.getCurrentPosition(),
-                    robot.backLift.getCurrentPosition());
+                    robot.liftArm.getCurrentPosition());
             telemetry.update();
         }
 
-        robot.frontLift.setPower(0);
-        robot.backLift.setPower(0);
+        robot.liftArm.setPower(0);
 
-        robot.frontLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.backLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.liftArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void runPath(PVector[] path) {
@@ -65,9 +56,6 @@ public abstract class CoreAuto extends LinearOpMode{
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
-
-            robot.backLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.frontLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             robot.leftDrive.setTargetPosition(ticks);
             robot.rightDrive.setTargetPosition(ticks);
@@ -108,9 +96,6 @@ public abstract class CoreAuto extends LinearOpMode{
     public void encoderTurn(double speed, int ticks) {
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
-
-            robot.backLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.frontLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             robot.leftDrive.setTargetPosition(ticks);
             robot.rightDrive.setTargetPosition(-ticks);
