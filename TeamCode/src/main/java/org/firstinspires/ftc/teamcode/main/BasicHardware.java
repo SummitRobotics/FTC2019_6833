@@ -28,7 +28,7 @@ public class BasicHardware {
 
     final public double HEX_CORE_REV_COUNTS = 288;
 
-    final public double LIFT_GEAR_RATIO = 72/30; //This is < 1.0 if geared up
+    final public double LIFT_GEAR_RATIO = 90/30; //This is < 1.0 if geared up
     final public double LIFT_COUNTS_PER_ROT = (LIFT_GEAR_RATIO * HEX_CORE_REV_COUNTS);
 
     //final public double ARM_GEAR_RATIO = 1; // This is < 1.0 if geared up
