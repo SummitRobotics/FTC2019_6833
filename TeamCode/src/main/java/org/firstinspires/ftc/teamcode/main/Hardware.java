@@ -8,14 +8,13 @@ public class Hardware {
     // Declare Hardware members.
     public DcMotor leftDrive = null;
     public DcMotor rightDrive = null;
-    // public DcMotor liftArm = null;
     public Servo markerDrop = null;
 
 
     // Prepare variables for encoder use
     // http://www.revrobotics.com/content/docs/Encoder-Guide.pdf
     private final double HD_HEX_REV_COUNTS = 1120; // 1120 for 40:1, 560 for 20:1
-    private final double DRIVE_GEAR_RATIO = 72/125; // This is < 1.0 if geared up
+    private final double DRIVE_GEAR_RATIO = (double)72/(double)125; // This is < 1.0 if geared up
     private final double WHEEL_CIRCUMFERENCE = 6 * 3.1415;
     public final int DRIVE_COUNTS_PER_INCH = (int) (HD_HEX_REV_COUNTS * DRIVE_GEAR_RATIO *
             WHEEL_CIRCUMFERENCE);
@@ -38,14 +37,12 @@ public class Hardware {
         //Init hardware
         leftDrive = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
-        // liftArm = hwMap.get(DcMotor.class, "liftArm");
         markerDrop = hwMap.get(Servo.class, "markerDrop");
 
 
         // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        // liftArm.setDirection(DcMotor.Direction.FORWARD);
         markerDrop.setPosition(0.5);
     }
 }
