@@ -1,8 +1,6 @@
-//package org.firstinspires.ftc.teamcode.autonomous;
+package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
-import org.firstinspires.ftc.teamcode.main.PVector;
+import org.firstinspires.ftc.teamcode.main.Action;
 
 //-3.981292
 //47.59374
@@ -22,11 +20,10 @@ import org.firstinspires.ftc.teamcode.main.PVector;
 //-9.134702
 //28.87537
 
-/**
 public class MainAuto extends CoreAuto {
 
 
-    public PVector[] path = new PVector[7];
+    public Action[] path = new Action[7];
 
     public void runOpMode() {
 
@@ -38,17 +35,15 @@ public class MainAuto extends CoreAuto {
 
         telemetry.addData("Status", "Running");
 
-        path[0] = new PVector(-3.981292, 47.59374);
-        path[1] = new PVector(9.95072, 22.325);
-        path[2] = new PVector(0.7, robot.markerDrop);
-        path[3] = new PVector(7.088131, 21.58165);
-        path[4] = new PVector(4.661365, 37.130745);
-        path[5] = new PVector(4.7618604, 20.821053);
-        path[6] = new PVector(-9.134702, 28.87537);
+        path[0] = new Action(-3.981292, 47.59374);
+        path[1] = new Action(9.95072, 22.325);
+        path[2] = new Action(0.7, robot.markerDrop);
+        path[3] = new Action(7.088131, 21.58165);
+        path[4] = new Action(4.661365, 37.130745);
+        path[5] = new Action(4.7618604, 20.821053);
+        path[6] = new Action(-9.134702, 28.87537);
 
         runPath(path);
 
     }
 }
-
- **/
