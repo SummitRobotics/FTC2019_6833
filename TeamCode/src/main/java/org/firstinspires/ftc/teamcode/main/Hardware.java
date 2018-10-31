@@ -38,7 +38,7 @@ public class Hardware {
         //Init hardware
         leftDrive = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
-        liftMotor = hwMap.get(DcMotor.class, "leftMotor");
+        liftMotor = hwMap.get(DcMotor.class, "liftMotor");
         markerDrop = hwMap.get(Servo.class, "markerDrop");
 
 

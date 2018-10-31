@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.main.Action;
 
+@Autonomous(name="CraterSideAuto", group="Linear Opmode")
 public class CraterSideAuto extends CoreAuto {
 
 
@@ -17,6 +20,7 @@ public class CraterSideAuto extends CoreAuto {
 
         telemetry.addData("Status", "Running");
 
+        liftMast(0.7, 3);
         path[0] = new Action(37.061516, -4.2607856);
         path[1] = new Action(65.446976, -12.220759);
         path[2] = new Action(0.7, robot.markerDrop);
