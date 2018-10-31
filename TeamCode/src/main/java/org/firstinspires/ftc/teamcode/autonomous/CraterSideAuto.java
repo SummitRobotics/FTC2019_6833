@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import org.firstinspires.ftc.teamcode.main.Action;
+import org.firstinspires.ftc.teamcode.autonomous.actions.Action;
 
 public class CraterSideAuto extends CoreAuto {
 

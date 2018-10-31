@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import org.firstinspires.ftc.teamcode.main.Action;
+import org.firstinspires.ftc.teamcode.autonomous.actions.Action;
+
+import java.util.ArrayList;
 
 public class DepotSideAuto extends CoreAuto {
 
 
-    private Action[] path = new Action[4];
+    private ArrayList<Action> path;
 
     public void runOpMode() {
 
@@ -17,10 +19,10 @@ public class DepotSideAuto extends CoreAuto {
 
         telemetry.addData("Status", "Running");
 
-        path[0] = new Action(46.53059, -5.8526087);
-        path[1] = new Action(45.82741, 11.820012);
-        path[2] = new Action(0.7, robot.markerDrop);
-        path[3] = new Action(75.721436, 12.356607);
+        path.add(new Action(46.53059, -5.8526087));
+        path.add(new Action(45.82741, 11.820012));
+        path.add(new Action(0.7, robot.markerDrop));
+        path.add(new Action(75.721436, 12.356607));
 
         runPath(path);
 

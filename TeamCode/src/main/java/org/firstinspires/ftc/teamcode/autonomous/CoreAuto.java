@@ -5,8 +5,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.main.Hardware;
-import org.firstinspires.ftc.teamcode.main.Action;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import java.util.ArrayList;
 
 @Autonomous(name="mainAuto", group="Linear Opmode")
 public abstract class CoreAuto extends LinearOpMode{
@@ -14,20 +15,20 @@ public abstract class CoreAuto extends LinearOpMode{
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
 
-    void runPath(Action[] path) {
+    void runPath(ArrayList<Action> path) {
 
         //for (PVector move : path) {
-        for (int i = 0; i < path.length; i++) {
+        for (int i = 0; i < path.size(); i++) {
 
-            Action move = path[i];
+            Action move = path.get(i);
             telemetry.addData("For #", i);
             telemetry.update();
             if (move.servo == null) {
-                encoderMove(0.7, move.turnInches, -1);
-                encoderMove(0.7, move.moveInches, 1);
+                encoderMove(0.7, move.beta, -1);
+                encoderMove(0.7, move.alpha, 1);
             } else {
 
-                servoMove(move.servo, move.moveInches);
+                servoMove(move.servo, move.alpha);
             }
         }
     }
