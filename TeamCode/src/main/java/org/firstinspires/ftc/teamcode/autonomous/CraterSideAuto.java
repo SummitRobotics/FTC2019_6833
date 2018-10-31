@@ -14,7 +14,7 @@ public class CraterSideAuto extends CoreAuto {
 
         robot.init(hardwareMap);
 
-        actions.add(0, new Action(Action.Mode.LIFT, 5));
+        actions.add(0, new Action(Action.Mode.LIFT, 1));
         actions.add(1, new Action(Action.Mode.TURN, -3.149107));
         actions.add(2, new Action(Action.Mode.MOVE, 35.678234));
         actions.add(3, new Action(Action.Mode.TURN, -11.39856));
