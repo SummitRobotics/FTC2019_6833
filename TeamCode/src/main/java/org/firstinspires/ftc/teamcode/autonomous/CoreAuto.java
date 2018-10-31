@@ -13,9 +13,8 @@ public abstract class CoreAuto extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
-    public Action[] path = new Action[7];
 
-    public void runPath(Action[] path) {
+    void runPath(Action[] path) {
 
         //for (PVector move : path) {
         for (int i = 0; i < path.length; i++) {
@@ -33,7 +32,7 @@ public abstract class CoreAuto extends LinearOpMode{
         }
     }
 
-    public void encoderMove(double speed, double inches, int mode) {
+    private void encoderMove(double speed, double inches, int mode) {
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
@@ -73,7 +72,7 @@ public abstract class CoreAuto extends LinearOpMode{
         }
     }
 
-    public void servoMove(Servo servo, double goTo) {
+    private void servoMove(Servo servo, double goTo) {
         if (opModeIsActive()) {
             servo.setPosition(goTo);
         }
