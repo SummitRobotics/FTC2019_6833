@@ -8,41 +8,43 @@ import org.firstinspires.ftc.teamcode.main.Action;
 import com.qualcomm.robotcore.hardware.Servo;
 import java.util.ArrayList;
 
+// All auto methods and main method to iterate through Action ArrayList
 public abstract class CoreAuto extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
     private int FORWARD = 1, TURN = -1;
 
+    // Method to iterate through Actions.
     void runActions(ArrayList<Action> actions) {
 
         for (Action move : actions) {
 
-            if (move.mode == Action.LIFT) {
-                liftMast(0.7, move.value);
+            switch (move.mode) {
+                case LIFT: liftMast(0.7, move.value);
 
-            } else if (move.mode == Action.MOVE) {
-                encoderMove(0.7, move.value, FORWARD);
+                case MOVE: encoderMove(0.7, move.value, FORWARD);
 
-            } else if (move.mode == Action.TURN) {
-                encoderMove(0.7, move.value, TURN);
+                case TURN: encoderMove(0.7, move.value, TURN);
 
-            } else if (move.mode == Action.MARKER) {
-                servoMove(robot.markerDrop, move.value);
+                case MARKER: servoMove(robot.markerDrop, move.value);
             }
 
             sleep(200);
         }
     }
 
+    // Method to lift the mast
     void liftMast(double speed, double rotations) {
 
+        // Ensure that the opmode is active
         if (opModeIsActive()) {
             int ticks = (int)(rotations * robot.LIFT_COUNTS_PER_ROT);
 
             robot.liftMotor.setTargetPosition(robot.liftMotor.getCurrentPosition() + ticks);
             robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+            // Reset time and start motion
             runtime.reset();
             robot.liftMotor.setPower(speed);
 
@@ -56,10 +58,13 @@ public abstract class CoreAuto extends LinearOpMode{
                 telemetry.update();
             }
 
+            // Stop all motion
             robot.liftMotor.setPower(0);
             robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
+
+    // Method to move the robot (forward or turn based on mode)
     private void encoderMove(double speed, double inches, int mode) {
 
         // Ensure that the opmode is still active
@@ -69,7 +74,7 @@ public abstract class CoreAuto extends LinearOpMode{
 
             robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
             robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() + mode * ticks);
-            // Turn On RUN_TO_POSITION
+
             robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -99,6 +104,7 @@ public abstract class CoreAuto extends LinearOpMode{
         }
     }
 
+    // Method to move the specified servo
     private void servoMove(Servo servo, double goTo) {
         if (opModeIsActive()) {
             servo.setPosition(goTo);

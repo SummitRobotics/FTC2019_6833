@@ -25,7 +25,7 @@ public class Hardware {
     private final double LIFT_GEAR_RATIO = 1; // This is < 1.0 if geared up
     public final double LIFT_COUNTS_PER_ROT = (HEX_CORE_REV_COUNTS * LIFT_GEAR_RATIO);
 
-    // Local OpMode members
+    // Local opmode members
     private HardwareMap hwMap = null;
 
     // Constructor
