@@ -1,14 +1,17 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
 
 import java.util.ArrayList;
 
+@Autonomous(name="DepotSideAuto", group="LinearOpMode")
 public class DepotSideAuto extends CoreAuto {
 
 
-    private ArrayList<CoreAction> path;
+    private ArrayList<CoreAction> path = new ArrayList<>();
 
     public void runOpMode() {
 

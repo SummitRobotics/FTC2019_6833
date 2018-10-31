@@ -2,18 +2,15 @@ package org.firstinspires.ftc.teamcode.autonomous.actions;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class MoveByEncoder implements CoreAction {
 
 
-    double distance, speed;
-    int mode, ticks, nextPos;
-    private ElapsedTime runtime = new ElapsedTime();
+    private double speed;
+    private int mode, ticks, nextPos;
 
     public MoveByEncoder(double distance, double speed, int mode, int nextPos) {
 
-        this.distance = distance;
         this.speed = speed;
         this.mode = mode;
         this.nextPos = nextPos;
@@ -31,7 +28,6 @@ public class MoveByEncoder implements CoreAction {
         // Turn On RUN_TO_POSITION
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        runtime.reset();
     }
 
     @Override
