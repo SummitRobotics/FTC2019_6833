@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 import org.firstinspires.ftc.teamcode.main.Action;
+import java.util.ArrayList;
 
 @Autonomous(name="CraterSideAuto", group="Linear Opmode")
 public class CraterSideAuto extends CoreAuto {
 
-
-    private Action[] path = new Action[4];
+    private ArrayList<Action> actions = new ArrayList<Action>();
 
     public void runOpMode() {
 
@@ -20,13 +19,16 @@ public class CraterSideAuto extends CoreAuto {
 
         telemetry.addData("Status", "Running");
 
-        liftMast(0.7, 3);
-        path[0] = new Action(37.061516, -4.2607856);
-        path[1] = new Action(65.446976, -12.220759);
-        path[2] = new Action(0.7, robot.markerDrop);
-        path[3] = new Action(-64.156715, -24.806803);
+        actions.add(0, new Action(Action.LIFT, 5));
+        actions.add(1, new Action(Action.TURN, -3.149107));
+        actions.add(2, new Action(Action.MOVE, 35.678234));
+        actions.add(3, new Action(Action.TURN, -11.39856));
+        actions.add(4, new Action(Action.MOVE, 69.81121));
+        actions.add(5, new Action(Action.MARKER, 0.7));
+        actions.add(6, new Action(Action.TURN, 19.630495));
+        actions.add(7, new Action(Action.MOVE, 68.385));
 
-        runPath(path);
+        runActions(actions);
 
     }
 }

@@ -6,27 +6,32 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 import org.firstinspires.ftc.teamcode.main.Action;
 import com.qualcomm.robotcore.hardware.Servo;
+import java.util.ArrayList;
 
 public abstract class CoreAuto extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
+    private int FORWARD = 1, TURN = -1;
 
-    void runPath(Action[] path) {
+    void runActions(ArrayList<Action> actions) {
 
-        //for (PVector move : path) {
-        for (int i = 0; i < path.length; i++) {
+        for (Action move : actions) {
 
-            Action move = path[i];
-            telemetry.addData("For #", i);
-            telemetry.update();
-            if (move.servo == null) {
-                encoderMove(0.7, move.turnInches, -1);
-                encoderMove(0.7, move.moveInches, 1);
-            } else {
+            if (move.mode == Action.LIFT) {
+                liftMast(0.7, move.value);
 
-                servoMove(move.servo, move.moveInches);
+            } else if (move.mode == Action.MOVE) {
+                encoderMove(0.7, move.value, FORWARD);
+
+            } else if (move.mode == Action.TURN) {
+                encoderMove(0.7, move.value, TURN);
+
+            } else if (move.mode == Action.MARKER) {
+                servoMove(robot.markerDrop, move.value);
             }
+
+            sleep(200);
         }
     }
 
@@ -53,8 +58,6 @@ public abstract class CoreAuto extends LinearOpMode{
 
             robot.liftMotor.setPower(0);
             robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            sleep(200);
         }
     }
     private void encoderMove(double speed, double inches, int mode) {
@@ -93,15 +96,12 @@ public abstract class CoreAuto extends LinearOpMode{
             // Turn off RUN_TO_POSITION
             robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            sleep(200);
         }
     }
 
     private void servoMove(Servo servo, double goTo) {
         if (opModeIsActive()) {
             servo.setPosition(goTo);
-            sleep(200);
         }
     }
 }
