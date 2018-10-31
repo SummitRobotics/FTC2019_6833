@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.autonomous.actions;
 
-import org.firstinspires.ftc.teamcode.autonomous.CoreAuto;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
 public interface CoreAction {
@@ -9,5 +8,5 @@ public interface CoreAction {
 
     void runInit();
 
-    boolean run();
+    int run();
 }

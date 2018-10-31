@@ -4,20 +4,21 @@ package org.firstinspires.ftc.teamcode.autonomous.actions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class DriveByEncoder implements CoreAction {
+public class MoveByEncoder implements CoreAction {
 
 
     double distance, speed;
-    int mode, ticks;
+    int mode, ticks, nextPos;
     private ElapsedTime runtime = new ElapsedTime();
 
-    DriveByEncoder( double distance, double speed, int mode ) {
+    public MoveByEncoder(double distance, double speed, int mode, int nextPos) {
 
         this.distance = distance;
         this.speed = speed;
         this.mode = mode;
+        this.nextPos = nextPos;
 
-        int ticks = (int)(distance * robot.DRIVE_COUNTS_PER_INCH);
+        this.ticks = (int)(distance * robot.DRIVE_COUNTS_PER_INCH);
 
     }
 
@@ -34,7 +35,7 @@ public class DriveByEncoder implements CoreAction {
     }
 
     @Override
-    public boolean run() {
+    public int run() {
 
 
         robot.leftDrive.setPower(speed);
@@ -44,11 +45,11 @@ public class DriveByEncoder implements CoreAction {
 
             killRobot();
 
-            return true;
+            return nextPos;
 
         }
 
-        return false;
+        return 0;
     }
 
     private void killRobot() {

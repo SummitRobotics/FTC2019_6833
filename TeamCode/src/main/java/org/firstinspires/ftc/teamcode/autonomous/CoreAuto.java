@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.main.Hardware;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.ArrayList;
 
@@ -15,67 +15,26 @@ public abstract class CoreAuto extends LinearOpMode{
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
 
-    void runPath(ArrayList<Action> path) {
+    void runPath(ArrayList<CoreAction> path) {
 
-        //for (PVector move : path) {
-        for (int i = 0; i < path.size(); i++) {
+        int nextAction = 0;
+        int currentAction = 0;
 
-            Action move = path.get(i);
-            telemetry.addData("For #", i);
-            telemetry.update();
-            if (move.servo == null) {
-                encoderMove(0.7, move.beta, -1);
-                encoderMove(0.7, move.alpha, 1);
-            } else {
+        while (opModeIsActive()) {
 
-                servoMove(move.servo, move.alpha);
-            }
-        }
-    }
+            if (currentAction == -1) {
 
-    private void encoderMove(double speed, double inches, int mode) {
-
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
-
-            int ticks = (int)(inches * robot.DRIVE_COUNTS_PER_INCH);
-
-            robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
-            robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() +mode * ticks);
-
-            // Turn On RUN_TO_POSITION
-            robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robot.leftDrive.setPower(speed);
-            robot.rightDrive.setPower(mode * speed);
-
-            while (((robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) &&
-                    runtime.seconds() < 5 && opModeIsActive()) {
-
-                // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d", ticks,  ticks);
-                telemetry.addData("Path2",  "Running at %7d :%7d",
-                        robot.leftDrive.getCurrentPosition(),
-                        robot.rightDrive.getCurrentPosition());
-                telemetry.update();
+                break;
             }
 
-            // Stop all motion;
-            robot.leftDrive.setPower(0);
-            robot.rightDrive.setPower(0);
+            path.get(nextAction).runInit();
 
-            // Turn off RUN_TO_POSITION
-            robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-    }
+            while (nextAction == currentAction) {
 
-    private void servoMove(Servo servo, double goTo) {
-        if (opModeIsActive()) {
-            servo.setPosition(goTo);
+                nextAction = path.get(nextAction).run();
+            }
+
+            currentAction = nextAction;
         }
     }
 }
