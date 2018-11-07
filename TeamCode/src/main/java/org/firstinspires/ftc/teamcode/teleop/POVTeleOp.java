@@ -42,14 +42,14 @@ public class POVTeleOp extends OpMode{
 
         // Get gamepad inputs
         double drive = gamepad1.left_trigger - gamepad1.right_trigger;
-        double turn = gamepad1.left_stick_x;
+        double turn = -gamepad1.left_stick_x;
         double lift =  gamepad1.right_stick_y;
 
         telemetry.addData("ButtonState",gamepad1.a);
 
         // Set power variables
-        leftPower = Range.clip(drive + turn, -1.0, 1.0);
-        rightPower = Range.clip(drive - turn, -1.0, 1.0);
+        leftPower = Range.clip(drive + 1.5*turn, -1.0, 1.0);
+        rightPower = Range.clip(drive - 1.5*turn, -1.0, 1.0);
         liftPower = Range.clip(lift, -1.0, 1.0);
 
 

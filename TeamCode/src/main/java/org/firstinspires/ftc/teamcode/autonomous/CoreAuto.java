@@ -21,13 +21,14 @@ public abstract class CoreAuto extends LinearOpMode{
         for (Action move : actions) {
 
             switch (move.mode) {
-                case LIFT: liftMast(0.7, move.value);
+                case LIFT: liftMast(-0.7, move.value);
 
                 case MOVE: encoderMove(0.7, move.value, FORWARD);
 
                 case TURN: encoderMove(0.7, move.value, TURN);
 
-                case MARKER: servoMove(robot.markerDrop, move.value);
+                case MARKER: servoMove(robot.markerDropLeft, move.value);
+                             servoMove(robot.markerDropRight, move.value);
             }
 
             sleep(200);
@@ -39,6 +40,14 @@ public abstract class CoreAuto extends LinearOpMode{
 
         // Ensure that the opmode is active
         if (opModeIsActive()) {
+
+            // Ensure speed and direction match.
+            if (rotations < 0 && speed > 0) {
+                speed *= -1;
+            } else if (rotations > 0 && speed < 0) {
+                speed *= -1;
+            }
+
             int ticks = (int)(rotations * robot.LIFT_COUNTS_PER_ROT);
 
             robot.liftMotor.setTargetPosition(robot.liftMotor.getCurrentPosition() + ticks);

@@ -11,15 +11,16 @@ public class ProtoServoTest extends OpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     //private ServoToggle testToggle = null;
-    private Servo testServo = null;
+    private Servo testServoLeft = null;
+    private Servo testServoRight = null;
 
     @Override
     public void init() {
 
         telemetry.addData("Status", "Initializing");
 
-        testServo = hardwareMap.get(Servo.class, "testServo");
-        //testToggle = new ServoToggle(testServo, .3, .7);
+        testServoLeft = hardwareMap.get(Servo.class, "markerDropLeft");
+        testServoRight = hardwareMap.get(Servo.class, "markerDropRight");
 
         telemetry.addData("Status", "Initialized");
     }
@@ -39,7 +40,13 @@ public class ProtoServoTest extends OpMode {
 
         telemetry.addData("Status", "Running");
 
-        //testToggle.setServoState(gamepad1.a);
+        if (gamepad1.a) {
+            testServoLeft.setPosition(0.5);
+            testServoRight.setPosition(0.5);
+        } else {
+            testServoLeft.setPosition(0.9);
+            testServoRight.setPosition(0.9);
+        }
     }
 
     @Override
