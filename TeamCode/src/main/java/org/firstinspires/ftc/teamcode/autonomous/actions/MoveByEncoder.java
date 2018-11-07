@@ -7,16 +7,16 @@ public class MoveByEncoder implements CoreAction {
 
 
     private double speed;
-    private int mode, ticks, nextPos;
+    private int mode, ticks;
+    private Integer nextPos;
 
-    public MoveByEncoder(double distance, double speed, int mode, int nextPos) {
+    public MoveByEncoder(double distance, double speed, int mode, Integer nextPos) {
 
         this.speed = speed;
         this.mode = mode;
         this.nextPos = nextPos;
 
         this.ticks = (int)(distance * robot.DRIVE_COUNTS_PER_INCH);
-
     }
 
     @Override
@@ -31,8 +31,7 @@ public class MoveByEncoder implements CoreAction {
     }
 
     @Override
-    public int run() {
-
+    public Integer run() {
 
         robot.leftDrive.setPower(speed);
         robot.rightDrive.setPower(mode * speed);
@@ -42,7 +41,6 @@ public class MoveByEncoder implements CoreAction {
             killRobot();
 
             return nextPos;
-
         }
 
         return 0;

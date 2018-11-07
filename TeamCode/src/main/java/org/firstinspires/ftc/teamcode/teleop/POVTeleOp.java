@@ -18,7 +18,7 @@ public class POVTeleOp extends OpMode{
 
         telemetry.addData("Status", "Initialized");
 
-        // Initialize all hardware and servo toggles
+        // Initialize all hardware
         robot.init(hardwareMap);
 
         // Tell the driver that initialization is complete.
@@ -42,16 +42,13 @@ public class POVTeleOp extends OpMode{
 
         // Get gamepad inputs
         double drive = gamepad1.left_trigger - gamepad1.right_trigger;
-        double turn = gamepad1.left_stick_x;
+        double turn = -gamepad1.left_stick_x;
         double lift =  gamepad2.left_trigger - gamepad2.right_trigger;
-
-        telemetry.addData("ButtonState",gamepad1.a);
 
         // Set power variables
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
         rightPower = Range.clip(drive - turn, -1.0, 1.0);
         liftPower = Range.clip(lift, -1.0, 1.0);
-
 
         // Send calculated power to hardware
         robot.leftDrive.setPower(leftPower);

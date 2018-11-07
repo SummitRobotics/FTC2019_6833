@@ -11,10 +11,13 @@ import java.util.ArrayList;
 public class DepotSideAuto extends CoreAuto {
 
 
+    //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
 
+    @Override
     public void runOpMode() {
 
+        //Initializes hardware
         robot.init(hardwareMap);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -23,11 +26,9 @@ public class DepotSideAuto extends CoreAuto {
 
         telemetry.addData("Status", "Running");
 
-        path.add(new MoveByEncoder(3,3,3,1));
-        path.add(new MoveByEncoder(4,4,4, -1));
-
+        path.add(new MoveByEncoder(3,0.4,1,1));
+        path.add(new MoveByEncoder(4,-.45,-1, null));
 
         runPath(path);
-
     }
 }

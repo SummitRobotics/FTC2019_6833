@@ -9,32 +9,33 @@ import org.firstinspires.ftc.teamcode.main.Hardware;
 
 import java.util.ArrayList;
 
-@Autonomous(name="mainAuto", group="Linear Opmode")
 public abstract class CoreAuto extends LinearOpMode{
 
-    private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
 
     void runPath(ArrayList<CoreAction> path) {
 
-        int nextAction = 0;
-        int currentAction = 0;
+        Integer currentAction = 0;
+        Integer nextAction = 0;
 
-        while (opModeIsActive()) {
+        while(nextAction != null) {
 
-            if (currentAction == -1) {
+            nextAction = 0;
+
+            path.get(currentAction).runInit();
+
+            while (nextAction == 0) {
+
+                nextAction = path.get(currentAction).run();
+            }
+
+            if (nextAction == null) {
 
                 break;
+            } else {
+
+                currentAction += nextAction;
             }
-
-            path.get(nextAction).runInit();
-
-            while (nextAction == currentAction) {
-
-                nextAction = path.get(nextAction).run();
-            }
-
-            currentAction = nextAction;
         }
     }
 }
