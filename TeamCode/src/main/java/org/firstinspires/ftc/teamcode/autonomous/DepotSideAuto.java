@@ -15,7 +15,7 @@ public class DepotSideAuto extends CoreAuto {
         robot.init(hardwareMap);
 
         // Create actions
-        actions.add(0, new Action(Action.Mode.LIFT, -1));
+        actions.add(0, new Action(Action.Mode.LIFT, 1.0));
         actions.add(1, new Action(Action.Mode.MOVE, 65.80335));
         actions.add(2, new Action(Action.Mode.MARKER, 0.5));
         actions.add(3, new Action(Action.Mode.TURN, 15.088611));

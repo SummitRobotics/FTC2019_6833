@@ -13,7 +13,7 @@ public abstract class CoreAuto extends LinearOpMode{
 
     private ElapsedTime runtime = new ElapsedTime();
     Hardware robot = new Hardware();
-    private int FORWARD = 1, TURN = -1;
+    private final int FORWARD = 1, TURN = -1;
 
     // Method to iterate through Actions.
     void runActions(ArrayList<Action> actions) {
@@ -21,14 +21,18 @@ public abstract class CoreAuto extends LinearOpMode{
         for (Action move : actions) {
 
             switch (move.mode) {
-                case LIFT: liftMast(-0.7, move.value);
+                case LIFT: liftMast(0.7, move.value);
+                break;
 
                 case MOVE: encoderMove(0.7, move.value, FORWARD);
+                break;
 
                 case TURN: encoderMove(0.7, move.value, TURN);
+                break;
 
                 case MARKER: servoMove(robot.markerDropLeft, move.value);
                              servoMove(robot.markerDropRight, move.value);
+                             break;
             }
 
             sleep(200);
@@ -57,7 +61,7 @@ public abstract class CoreAuto extends LinearOpMode{
             runtime.reset();
             robot.liftMotor.setPower(speed);
 
-            while (((robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) &&
+            while (robot.liftMotor.isBusy() &&
                     runtime.seconds() < 5 && opModeIsActive()) {
 
                 // Display it for the driver.
