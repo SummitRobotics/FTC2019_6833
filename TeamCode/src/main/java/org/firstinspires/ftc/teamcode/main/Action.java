@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.main;
 public class Action {
     public double value;
     public enum Mode {
-        MOVE, TURN, LIFT, MARKER;
+        MOVE, TURN, LIFT, MARKER, WAIT;
     }
     public Mode mode;
 

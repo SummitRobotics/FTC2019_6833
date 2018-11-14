@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.main;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -9,8 +10,7 @@ public class Hardware {
     public DcMotor leftDrive = null;
     public DcMotor rightDrive = null;
     public DcMotor liftMotor = null;
-    public Servo markerDropLeft = null;
-    public Servo markerDropRight = null;
+    public Servo markerDrop = null;
 
 
     // Prepare variables for encoder use
@@ -40,15 +40,13 @@ public class Hardware {
         leftDrive = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
-        markerDropLeft = hwMap.get(Servo.class, "markerDropLeft");
-        markerDropRight = hwMap.get(Servo.class, "markerDropRight");
+        markerDrop = hwMap.get(Servo.class, "markerDrop");
 
 
         // Reverse the motor that runs backwards, set servo positions.
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
-        markerDropLeft.setPosition(0.9);
-        markerDropRight.setPosition(0.9);
+        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }

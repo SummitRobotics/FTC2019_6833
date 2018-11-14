@@ -27,20 +27,26 @@ public abstract class CoreAuto extends LinearOpMode{
                 case MOVE: encoderMove(0.7, move.value, FORWARD);
                 break;
 
-                case TURN: encoderMove(0.7, move.value, TURN);
+                case TURN: encoderMove(0.4, move.value, TURN);
                 break;
 
-                case MARKER: servoMove(robot.markerDropLeft, move.value);
-                             servoMove(robot.markerDropRight, move.value);
-                             break;
+                case MARKER: servoMove(robot.markerDrop, move.value);
+                break;
+
+                case WAIT: waitSeconds((long) move.value);
+                break;
             }
 
             sleep(200);
         }
     }
 
+    private void waitSeconds(long seconds) {
+        sleep(1000 * seconds);
+    }
+
     // Method to lift the mast
-    void liftMast(double speed, double rotations) {
+    private void liftMast(double speed, double rotations) {
 
         // Ensure that the opmode is active
         if (opModeIsActive()) {
@@ -62,7 +68,7 @@ public abstract class CoreAuto extends LinearOpMode{
             robot.liftMotor.setPower(speed);
 
             while (robot.liftMotor.isBusy() &&
-                    runtime.seconds() < 5 && opModeIsActive()) {
+                    runtime.seconds() < 3 && opModeIsActive()) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d", ticks);
