@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.autonomous.actions;
 
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Lift implements CoreAction {
@@ -20,7 +19,6 @@ public class Lift implements CoreAction {
     public void runInit() {
 
         robot.liftMotor.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
-
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -43,7 +41,6 @@ public class Lift implements CoreAction {
     private void killRobot() {
 
         robot.liftMotor.setPower(0);
-
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }

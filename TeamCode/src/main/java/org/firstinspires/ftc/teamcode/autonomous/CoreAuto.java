@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
@@ -12,13 +10,16 @@ import java.util.ArrayList;
 public abstract class CoreAuto extends LinearOpMode{
 
     Hardware robot = new Hardware();
+    final Integer END = null;
 
     void runPath(ArrayList<CoreAction> path) {
 
-        Integer currentAction = 0;
+        int currentAction = 0;
         Integer nextAction = 0;
 
-        while(nextAction != null) {
+        do {
+
+            currentAction += nextAction;
 
             nextAction = 0;
 
@@ -29,13 +30,6 @@ public abstract class CoreAuto extends LinearOpMode{
                 nextAction = path.get(currentAction).run();
             }
 
-            if (nextAction == null) {
-
-                break;
-            } else {
-
-                currentAction += nextAction;
-            }
-        }
+        } while (nextAction != END);
     }
 }

@@ -31,7 +31,7 @@ public class MoveByEncoder implements CoreAction {
     }
 
     @Override
-    public Integer run() {
+    public int run() {
 
         robot.leftDrive.setPower(speed);
         robot.rightDrive.setPower(mode * speed);

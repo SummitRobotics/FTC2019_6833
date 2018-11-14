@@ -8,5 +8,5 @@ public interface CoreAction {
 
     void runInit();
 
-    Integer run();
+    int run();
 }

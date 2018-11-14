@@ -10,7 +10,6 @@ import java.util.ArrayList;
 @Autonomous(name="DepotSideAuto", group="LinearOpMode")
 public class DepotSideAuto extends CoreAuto {
 
-
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
 
@@ -19,15 +18,17 @@ public class DepotSideAuto extends CoreAuto {
 
         //Initializes hardware
         robot.init(hardwareMap);
+
+        path.add(new MoveByEncoder(30,0.4, robot.FORWARD,2));
+        path.add(new MoveByEncoder(10,.1,robot.FORWARD,END));
+        path.add(new MoveByEncoder(30,-.45, robot.TURN, END));
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         waitForStart();
 
         telemetry.addData("Status", "Running");
-
-        path.add(new MoveByEncoder(3,0.4,1,1));
-        path.add(new MoveByEncoder(4,-.45,-1, null));
 
         runPath(path);
     }
