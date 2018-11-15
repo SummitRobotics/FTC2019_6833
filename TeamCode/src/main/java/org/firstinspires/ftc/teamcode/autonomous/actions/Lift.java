@@ -1,13 +1,17 @@
 package org.firstinspires.ftc.teamcode.autonomous.actions;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Lift implements CoreAction {
 
     private double speed;
-    int ticks, nextPos;
+    int ticks;
+    Integer nextPos;
 
-    public Lift(double distance, double speed, int nextPos) {
+    public Lift(double distance, double speed, Integer nextPos) {
 
         this.speed = speed;
         this.nextPos = nextPos;
@@ -16,14 +20,16 @@ public class Lift implements CoreAction {
     }
 
     @Override
-    public void runInit() {
+    public void runInit(HardwareMap hardwareMap, Telemetry telemetry) {
+
+        robot.init(hardwareMap);
 
         robot.liftMotor.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @Override
-    public int run() {
+    public Integer run() {
 
         robot.liftMotor.setPower(speed);
 

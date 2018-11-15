@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.autonomous.actions;
 
-
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class MoveByEncoder implements CoreAction {
 
@@ -20,7 +22,9 @@ public class MoveByEncoder implements CoreAction {
     }
 
     @Override
-    public void runInit() {
+    public void runInit(HardwareMap hardwareMap, Telemetry telemetry) {
+
+        robot.init(hardwareMap);
 
         robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
         robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() + mode * ticks);
@@ -31,7 +35,7 @@ public class MoveByEncoder implements CoreAction {
     }
 
     @Override
-    public int run() {
+    public Integer run() {
 
         robot.leftDrive.setPower(speed);
         robot.rightDrive.setPower(mode * speed);
