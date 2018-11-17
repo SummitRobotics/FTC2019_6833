@@ -10,5 +10,5 @@ public interface CoreAction {
 
     void runInit(HardwareMap hardwareMap, Telemetry telemetry);
 
-    Integer run();
+    int run();
 }

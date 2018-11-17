@@ -21,16 +21,16 @@ public class VisionTest extends CoreAuto {
         //Initializes hardware
         robot.init(hardwareMap);
 
-        path.add(new SampleDetection(1, 2, 3));
+        path.add(new SampleDetection(1, 3, 2));
 
         // Left
-        path.add(new MoveByEncoder(30,0.4, robot.TURN, END));
+        path.add(new MoveByEncoder(30,0.4, robot.TURN, 2));
 
         // Right
-        path.add(new Lift(1.3, 0.4, END));
+        path.add(new MoveByEncoder(-30,0.4, robot.TURN, 1));
 
         // Center
-        path.add(new MoveByEncoder(30,0.4, robot.FORWARD, END));
+        path.add(new MoveByEncoder(30, 0.4, robot.FORWARD, END));
 
 
         telemetry.addData("Status", "Initialized");

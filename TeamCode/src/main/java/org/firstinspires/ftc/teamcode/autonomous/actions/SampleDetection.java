@@ -50,7 +50,7 @@ public class SampleDetection implements CoreAction {
     }
 
     @Override
-    public Integer run() {
+    public int run() {
 
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
@@ -93,7 +93,7 @@ public class SampleDetection implements CoreAction {
             }
         }
 
-        return null;
+        return 0;
     }
 
     private void killRobot() {

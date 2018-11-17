@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public abstract class CoreAuto extends LinearOpMode{
 
     protected Hardware robot = new Hardware();
-    protected final Integer END = -1;
+    protected final int END = -1;
 
     protected void runPath(ArrayList<CoreAction> path) {
 
-        Integer currentAction = 0;
-        Integer nextAction = 0;
+        int currentAction = 0;
+        int nextAction = 0;
 
         do {
 
@@ -29,6 +29,6 @@ public abstract class CoreAuto extends LinearOpMode{
                 nextAction = path.get(currentAction).run();
             }
 
-        } while (!nextAction.equals(END));
+        } while (nextAction != END);
     }
 }

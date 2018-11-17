@@ -29,7 +29,7 @@ public class Lift implements CoreAction {
     }
 
     @Override
-    public Integer run() {
+    public int run() {
 
         robot.liftMotor.setPower(speed);
 
