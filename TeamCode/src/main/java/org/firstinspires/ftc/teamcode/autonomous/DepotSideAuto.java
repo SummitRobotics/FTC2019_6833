@@ -15,13 +15,11 @@ public class DepotSideAuto extends CoreAuto {
     @Override
     public void runOpMode() {
 
-        //Initializes hardware
-        robot.init(hardwareMap);
-
+        // Add paths for autonomous
         path.add(new Lift(1.3, 0.4, 1));
-        path.add(new MoveByEncoder(70,0.4, robot.FORWARD, END));
+        path.add(new MoveByEncoder(70,0.4, MoveByEncoder.FORWARD, END));
 
-
+        // Update telemetry
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -29,6 +27,7 @@ public class DepotSideAuto extends CoreAuto {
 
         telemetry.addData("Status", "Running");
 
+        // Run the paths created earlier
         runPath(path);
     }
 }

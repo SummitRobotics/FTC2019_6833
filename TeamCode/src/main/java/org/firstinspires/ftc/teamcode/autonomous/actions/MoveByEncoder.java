@@ -2,15 +2,18 @@ package org.firstinspires.ftc.teamcode.autonomous.actions;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+// Class to move forward or turn
 public class MoveByEncoder implements CoreAction {
-
 
     private double speed;
     private int mode, ticks;
-    private Integer nextPos;
+    private int nextPos;
+    private Telemetry telemetry;
+
+    // Direction variables
+    public static final int FORWARD = 1,  TURN = -1;
 
     public MoveByEncoder(double distance, double speed, int mode, Integer nextPos) {
 
@@ -22,10 +25,12 @@ public class MoveByEncoder implements CoreAction {
     }
 
     @Override
-    public void runInit(HardwareMap hardwareMap, Telemetry telemetry) {
+    public void actionInit(HardwareMap hardwareMap, Telemetry telemetry) {
 
         robot.init(hardwareMap);
+        this.telemetry = telemetry;
 
+        // Prepare motors for encoder movement
         robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
         robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() + mode * ticks);
 
@@ -36,22 +41,26 @@ public class MoveByEncoder implements CoreAction {
 
     @Override
     public int run() {
-
+        // Set motor power until finished
         robot.leftDrive.setPower(speed);
         robot.rightDrive.setPower(mode * speed);
 
         if ( !robot.leftDrive.isBusy() && !robot.rightDrive.isBusy() ) {
-
-            killRobot();
-
             return nextPos;
         }
 
+        telemetry.addData("Drive Left:", "Running to: " + ticks +
+                ", Running at: " + robot.leftDrive.getCurrentPosition());
+        telemetry.addData("Drive Right:", "Running to: " + ticks * mode +
+                ", Running at: " + robot.rightDrive.getCurrentPosition());
+        telemetry.update();
         return 0;
     }
 
-    private void killRobot() {
+    @Override
+    public void actionEnd() {
 
+        // Set power to 0
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
 

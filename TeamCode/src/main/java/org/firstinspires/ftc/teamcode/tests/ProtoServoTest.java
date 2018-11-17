@@ -9,43 +9,35 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class ProtoServoTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-
-    //private ServoToggle testToggle = null;
     private Servo testServo = null;
 
     @Override
     public void init() {
-
-        telemetry.addData("Status", "Initializing");
-
+        // Initialize servo
         testServo = hardwareMap.get(Servo.class, "testServo");
-        //testToggle = new ServoToggle(testServo, .3, .7);
 
         telemetry.addData("Status", "Initialized");
     }
 
     @Override
-    public void init_loop() {
-
-    }
+    public void init_loop() { }
 
     @Override
-    public void start() {
-        runtime.reset();
-    }
+    public void start() { runtime.reset(); }
 
     @Override
     public void loop() {
+        // Set servo position based on game pad "a" button
+        if (gamepad1.a) {
+            testServo.setPosition(0.7);
+        } else {
+            testServo.setPosition(0.4);
+        }
 
         telemetry.addData("Status", "Running");
-
-        //testToggle.setServoState(gamepad1.a);
+        telemetry.addData("Servo Position", testServo.getPosition());
     }
 
     @Override
-    public void stop() {
-
-        telemetry.addData("Status", "Stopped");
-    }
-
+    public void stop() { telemetry.addData("Status", "Stopped"); }
 }

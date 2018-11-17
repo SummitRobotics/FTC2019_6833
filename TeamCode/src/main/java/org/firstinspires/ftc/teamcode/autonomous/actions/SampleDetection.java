@@ -8,14 +8,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.teamcode.main.Hardware;
 
+// Class to use phone camera to detect gold mineral
 public class SampleDetection implements CoreAction {
 
-    Integer nextPos1, nextPos2, nextPos3;
-    Telemetry telemetry;
-    HardwareMap hardwareMap;
+    // Variables for action
+    private int nextPos1, nextPos2, nextPos3;
+    private Telemetry telemetry;
+    private HardwareMap hardwareMap;
 
+    // Variables for Vuforia and Tensor Flow
     private static final String VUFORIA_KEY = "AT1C2Ar/////AAABmfar9R+GH0MImzCa8UF4lUZ8LgjTo9mRlnRVKWMQiuxY/ZtbqSk4lG/4py3aMDqB0hP1FGC9EzgF2wmcVWVtl3hyTngl17UAeBJaROQuvCuBI4BX+PzqZGuvU50uzGRpNAmRs+dbUtOlxgQTn7CAhvMvVPSu30KbWGAVxjS9FoWIm76KsTmO4sJ16usgbwgb+Y6Rj2NMhgYa3Dd+z9z8nIt5dvay8M4/XgtBNfEEf4eH+w0Mbs9tQGc9pSAe3VG7m/T69LmD1Thmd641EflttJ4geP7TbI9q7e2LPhGwLLE+1FaHeaSa2OdCbzFcITVhHtop+F1qNWJbKWpWKHwUEbeAf2do9lTWV0PjoUTcE44y";
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -32,7 +34,7 @@ public class SampleDetection implements CoreAction {
     }
 
     @Override
-    public void runInit(HardwareMap hardwareMap, Telemetry telemetry) {
+    public void actionInit(HardwareMap hardwareMap, Telemetry telemetry) {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
         initVuforia();
@@ -51,17 +53,20 @@ public class SampleDetection implements CoreAction {
 
     @Override
     public int run() {
-
         if (tfod != null) {
             // getUpdatedRecognitions() will return null if no new information is available since
             // the last time that call was made.
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
                 telemetry.addData("# Object Detected", updatedRecognitions.size());
+
+                // Check if 3 minerals have been detected
                 if (updatedRecognitions.size() == 3) {
                     int goldMineralX = -1;
                     int silverMineral1X = -1;
                     int silverMineral2X = -1;
+
+                    // Get mineral positions
                     for (Recognition recognition : updatedRecognitions) {
                         if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
                             goldMineralX = (int) recognition.getLeft();
@@ -72,20 +77,14 @@ public class SampleDetection implements CoreAction {
                         }
                     }
 
-                    killRobot();
-
+                    // Complete actions based on mineral positions
                     if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+
                         if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
-                            telemetry.addData("Position", "Left");
-                            telemetry.update();
                             return nextPos1; //Left
                         } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
-                            telemetry.addData("Position", "Right");
-                            telemetry.update();
                             return nextPos3; //Right
                         } else {
-                            telemetry.addData("Position", "Center");
-                            telemetry.update();
                             return nextPos2; //Center
                         }
                     }
@@ -93,10 +92,13 @@ public class SampleDetection implements CoreAction {
             }
         }
 
+        // Return 0 if action is still in progress
         return 0;
     }
 
-    private void killRobot() {
+    @Override
+    public void actionEnd() {
+        // Kill camera
         if (tfod != null) {
             tfod.shutdown();
         }

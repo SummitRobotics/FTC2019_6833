@@ -11,24 +11,19 @@ import com.qualcomm.robotcore.util.Range;
 public class ProtoMotorTest extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
-
     private DcMotor testMotor = null;
 
 
     @Override
     public void init() {
-
-        telemetry.addData("Status", "Initializing");
-
+        // Initialize motor
         testMotor = hardwareMap.get(DcMotor.class, "test");
 
         telemetry.addData("Status", "Initialized");
     }
 
     @Override
-    public void init_loop() {
-
-    }
+    public void init_loop() { }
 
     @Override
     public void start() {
@@ -37,22 +32,17 @@ public class ProtoMotorTest extends OpMode {
 
     @Override
     public void loop() {
-
-        telemetry.addData("Status", "Running");
-
-        double power;
-
+        // Set motor power based on triggers.
         double drive = gamepad1.left_trigger - gamepad1.right_trigger;
-
-        power = Range.clip(drive, -1.0, 1.0) ;
+        double power = Range.clip(drive, -1.0, 1.0) ;
 
         testMotor.setPower(power);
+
+        telemetry.addData("Status", "Running");
+        telemetry.addData("Motor Power", power);
         }
 
     @Override
-    public void stop() {
-
-        telemetry.addData("Status", "Stopped");
-    }
+    public void stop() { telemetry.addData("Status", "Stopped"); }
 
 }

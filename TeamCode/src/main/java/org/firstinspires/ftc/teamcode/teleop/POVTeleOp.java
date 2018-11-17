@@ -10,14 +10,11 @@ import org.firstinspires.ftc.teamcode.main.Hardware;
 @TeleOp(name="POVTeleOp", group="Iterative Opmode")
 public class POVTeleOp extends OpMode{
 
-    Hardware robot = new Hardware();
+    private Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void init() {
-
-        telemetry.addData("Status", "Initialized");
-
         // Initialize all hardware
         robot.init(hardwareMap);
 
@@ -58,9 +55,10 @@ public class POVTeleOp extends OpMode{
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+        telemetry.addData("Lift", liftPower);
     }
 
     @Override
-    public void stop() { }
+    public void stop() { telemetry.addData("Status", "Stopped"); }
 
 }
