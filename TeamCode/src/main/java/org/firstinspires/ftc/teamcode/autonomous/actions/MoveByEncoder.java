@@ -15,13 +15,18 @@ public class MoveByEncoder implements CoreAction {
     // Direction variables
     public static final int FORWARD = 1,  TURN = -1;
 
-    public MoveByEncoder(double distance, double speed, int mode, Integer nextPos) {
+    public MoveByEncoder(double distance, double speed, int mode, int nextPos) {
 
         this.speed = speed;
         this.mode = mode;
         this.nextPos = nextPos;
 
-        this.ticks = (int)(distance * robot.DRIVE_COUNTS_PER_INCH);
+        if (this.mode == FORWARD) {
+            this.ticks = (int) (distance * robot.DRIVE_COUNTS_PER_INCH);
+
+        } else {
+            this.ticks = (int) (distance * robot.DRIVE_COUNTS_PER_RADIAN);
+        }
     }
 
     @Override

@@ -12,7 +12,7 @@ public class Lift implements CoreAction {
     private int nextPos;
     private Telemetry telemetry;
 
-    public Lift(double distance, double speed, Integer nextPos) {
+    public Lift(double distance, double speed, int nextPos) {
 
         // Setup variables for use in action
         this.speed = speed;

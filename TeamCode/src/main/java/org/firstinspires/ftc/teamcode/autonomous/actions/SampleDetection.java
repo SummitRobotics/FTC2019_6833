@@ -26,7 +26,7 @@ public class SampleDetection implements CoreAction {
     private VuforiaLocalizer vuforia;
     private TFObjectDetector tfod;
 
-    public SampleDetection(Integer nextPos1, Integer nextPos2, Integer nextPos3) {
+    public SampleDetection(int nextPos1, int nextPos2, int nextPos3) {
 
         this.nextPos1 = nextPos1;
         this.nextPos2 = nextPos2;
