@@ -36,21 +36,30 @@ public class POVTeleOp extends OpMode{
         double leftPower;
         double rightPower;
         double liftPower;
+        double intakePower;
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
         double turn = gamepad1.left_stick_x;
-        double lift =  -gamepad1.right_stick_y;
 
         // Set power variables
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
         rightPower = Range.clip(drive - turn, -1.0, 1.0);
-        liftPower = Range.clip(lift, -1.0, 1.0);
+        liftPower = Range.clip(-gamepad1.right_stick_y, -1.0, 1.0);
+
+        if (gamepad1.a) {
+            intakePower = 1;
+        } else if (gamepad1.b) {
+            intakePower = -1;
+        } else {
+            intakePower =0;
+        }
 
         // Send calculated power to hardware
         robot.leftDrive.setPower(leftPower);
         robot.rightDrive.setPower(rightPower);
         robot.liftMotor.setPower(liftPower);
+        robot.intakeMotor.setPower(intakePower);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
