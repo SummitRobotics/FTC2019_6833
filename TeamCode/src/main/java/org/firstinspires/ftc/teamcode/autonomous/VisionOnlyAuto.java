@@ -26,10 +26,10 @@ public class VisionOnlyAuto extends CoreAuto {
         path.add(new SampleDetection(1, 3, 2));
 
         // Left Path
-        path.add(new MoveByEncoder(-0.62, 0.4, MoveByEncoder.TURN, 2));
+        path.add(new MoveByEncoder(0.62, 0.4, MoveByEncoder.TURN, 2));
 
         // Right Path
-        path.add(new MoveByEncoder(0.62, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(-0.62, -0.4, MoveByEncoder.TURN, 1));
 
         // Center and End
         path.add(new MoveByEncoder(37, 0.4, MoveByEncoder.FORWARD, END));

@@ -12,7 +12,7 @@ public class IntakeControl implements CoreAction {
     public IntakeControl(double speed, int nextPos) {
 
         this.speed = speed;
-        this.nextPos= nextPos;
+        this.nextPos = nextPos;
     }
 
     @Override

@@ -52,7 +52,7 @@ public class POVTeleOp extends OpMode{
         } else if (gamepad1.b) {
             intakePower = -1;
         } else {
-            intakePower =0;
+            intakePower = 0;
         }
 
         // Send calculated power to hardware
