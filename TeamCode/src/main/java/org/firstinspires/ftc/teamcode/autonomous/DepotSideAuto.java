@@ -25,7 +25,7 @@ public class DepotSideAuto extends CoreAuto {
         // Identify gold mineral and select path
         path.add(new IntakeControl(0.9, 1));
 
-        path.add(new SampleDetection(1, 6, 10));
+        path.add(new SampleDetection(1, 6, 10, 6));
 
         // Left Path
         path.add(new MoveByEncoder(-0.62, 0.4, MoveByEncoder.TURN, 1));

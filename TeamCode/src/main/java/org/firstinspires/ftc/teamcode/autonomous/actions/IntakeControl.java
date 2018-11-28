@@ -4,10 +4,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class IntakeControl implements CoreAction {
+public class IntakeControl extends CoreAction {
 
     double speed;
-    int nextPos;
 
     public IntakeControl(double speed, int nextPos) {
 

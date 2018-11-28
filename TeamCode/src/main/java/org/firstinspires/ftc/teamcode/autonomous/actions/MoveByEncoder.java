@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 // Class to move forward or turn
-public class MoveByEncoder implements CoreAction {
+public class MoveByEncoder extends CoreAction {
 
     private double speed;
     private int mode, ticks;

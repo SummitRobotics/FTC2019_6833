@@ -49,7 +49,7 @@ public abstract class CoreAuto extends LinearOpMode{
 
                 // End the program if runtime exceeds 5 seconds
                 if (runtime.seconds() > 5) {
-                    nextAction = END;
+                    nextAction = path.get(currentAction).nextPos;
                 }
             }
 

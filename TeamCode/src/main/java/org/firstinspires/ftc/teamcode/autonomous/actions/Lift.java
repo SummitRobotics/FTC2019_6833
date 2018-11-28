@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 // Class for lifting mast
-public class Lift implements CoreAction {
+public class Lift extends CoreAction {
 
     private double speed;
     private int ticks;

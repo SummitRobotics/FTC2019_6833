@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 // Class to use phone camera to detect gold mineral
-public class SampleDetection implements CoreAction {
+public class SampleDetection extends CoreAction {
 
     // Variables for action
     private int nextPos1, nextPos2, nextPos3;
@@ -26,11 +26,12 @@ public class SampleDetection implements CoreAction {
     private VuforiaLocalizer vuforia;
     private TFObjectDetector tfod;
 
-    public SampleDetection(int nextPos1, int nextPos2, int nextPos3) {
+    public SampleDetection(int nextPos1, int nextPos2, int nextPos3, int defaultPos) {
 
         this.nextPos1 = nextPos1;
         this.nextPos2 = nextPos2;
         this.nextPos3 = nextPos3;
+        this.nextPos = defaultPos;
     }
 
     @Override

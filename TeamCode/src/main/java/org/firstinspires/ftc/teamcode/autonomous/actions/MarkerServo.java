@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class MarkerServo implements CoreAction {
+public class MarkerServo extends CoreAction {
 
     double position;
     int nextPos;

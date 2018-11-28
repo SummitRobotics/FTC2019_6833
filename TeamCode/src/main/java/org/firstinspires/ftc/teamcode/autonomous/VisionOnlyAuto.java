@@ -23,7 +23,7 @@ public class VisionOnlyAuto extends CoreAuto {
         // Land
         //path.add(new Lift(1, 0.5, 1));
 
-        path.add(new SampleDetection(1, 3, 2));
+        path.add(new SampleDetection(1, 3, 2, 3));
 
         // Left Path
         path.add(new MoveByEncoder(0.62, 0.4, MoveByEncoder.TURN, 2));
