@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.main.Hardware;
 public abstract class CoreAction {
 
     Hardware robot = new Hardware();
-    public int nextPos = -1;
+    protected int nextPos = -1;
 
     /**
      * Method to run once at start of action use
@@ -22,7 +22,7 @@ public abstract class CoreAction {
      * @return Returns 0 if action is incomplete, returns distance between current index and next
      * index when action is complete
      */
-    public abstract int run();
+    public abstract int run() throws InterruptedException;
 
     /**
      * Method to run once at the end of action use
