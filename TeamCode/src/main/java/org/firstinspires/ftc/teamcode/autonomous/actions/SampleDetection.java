@@ -83,9 +83,9 @@ public class SampleDetection implements CoreAction {
                         if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
                             return nextPos1; //Left
                         } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
-                            return nextPos3; //Right
-                        } else {
                             return nextPos2; //Center
+                        } else {
+                            return nextPos3; //Right
                         }
                     }
                 }
