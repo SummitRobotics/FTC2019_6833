@@ -4,19 +4,25 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
+import org.firstinspires.ftc.teamcode.main.Hardware;
+
 import java.util.ArrayList;
 
 // Abstract class to create other autonomous programs
 public abstract class CoreAuto extends LinearOpMode{
 
     protected final int END = -1;
+    Hardware robot = new Hardware();
 
     /**
      * runPath method will run through all paths in an autonomous program. Each path will be
      * initialized, then run through until completion
      * @param path The list of paths to be run through
      */
+
     protected void runPath(ArrayList<CoreAction> path) {
+
+        robot.init(hardwareMap);
 
         // variables to store the currently running action location in the list of paths and the
         // location of the next path to run.
@@ -51,5 +57,10 @@ public abstract class CoreAuto extends LinearOpMode{
             path.get(currentAction).actionEnd();
 
         } while (nextAction != END && opModeIsActive());
+
+        robot.leftDrive.setPower(0);
+        robot.rightDrive.setPower(0);
+        robot.liftMotor.setPower(0);
+        robot.intakeMotor.setPower(0);
     }
 }
