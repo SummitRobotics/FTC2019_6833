@@ -37,7 +37,7 @@ public class MoveByEncoder extends CoreAction {
 
         // Prepare motors for encoder movement
         robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
-        robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() + mode * ticks);
+        robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() + (mode * ticks));
 
         // Turn On RUN_TO_POSITION
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -58,7 +58,6 @@ public class MoveByEncoder extends CoreAction {
                 ", Running at: " + robot.leftDrive.getCurrentPosition());
         telemetry.addData("Drive Right:", "Running to: " + ticks * mode +
                 ", Running at: " + robot.rightDrive.getCurrentPosition());
-        telemetry.update();
         return 0;
     }
 

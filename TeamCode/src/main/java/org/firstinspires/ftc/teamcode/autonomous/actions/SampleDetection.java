@@ -82,11 +82,17 @@ public class SampleDetection extends CoreAction {
                     if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
 
                         if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
+                            telemetry.addData("Side: ", "Left");
+                            telemetry.update();
                             return nextPos1; //Left
                         } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
-                            return nextPos2; //Center
-                        } else {
+                            telemetry.addData("Side: ", "Right");
+                            telemetry.update();
                             return nextPos3; //Right
+                        } else {
+                            telemetry.addData("Side: ", "Center");
+                            telemetry.update();
+                            return nextPos2; //Center
                         }
                     }
                 }

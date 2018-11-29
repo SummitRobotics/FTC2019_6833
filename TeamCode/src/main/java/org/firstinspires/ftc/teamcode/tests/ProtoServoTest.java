@@ -31,9 +31,9 @@ public class ProtoServoTest extends OpMode {
     public void loop() {
         // Set servo position based on game pad "a" button
         if (gamepad1.a) {
-            testServo.setPosition(0.7);
+            testServo.setPosition(0.5);
         } else {
-            testServo.setPosition(0.4);
+            testServo.setPosition(0.9);
         }
 
         telemetry.addData("Status", "Running");

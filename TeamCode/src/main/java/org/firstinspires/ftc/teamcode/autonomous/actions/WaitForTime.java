@@ -1,31 +1,34 @@
 package org.firstinspires.ftc.teamcode.autonomous.actions;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class WaitForTime extends CoreAction {
 
-    double time;
+    long time;
     int nextPos;
+    ElapsedTime runtime = new ElapsedTime();
 
-    public WaitForTime(double time, int nextPos) throws InterruptedException {
+    public WaitForTime(double time, int nextPos) {
 
-        this.time = time;
+        this.time = (long) time;
         this.nextPos = nextPos;
     }
 
     @Override
     public void actionInit(HardwareMap hardwareMap, Telemetry telemetry) {
-
+        runtime.reset();
     }
 
     @Override
-    public int run() throws InterruptedException {
+    public int run() {
 
-        wait((long) time);
+        if (runtime.time() > time) {
+            return nextPos;
+        }
 
-        return nextPos;
+        return 0;
     }
 
     @Override

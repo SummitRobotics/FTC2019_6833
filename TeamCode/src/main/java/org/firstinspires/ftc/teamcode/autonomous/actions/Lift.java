@@ -46,7 +46,6 @@ public class Lift extends CoreAction {
 
         telemetry.addData("Lift:", "Running to: " + ticks +
                 ", Running at: " + robot.liftMotor.getCurrentPosition());
-        telemetry.update();
         return 0;
     }
 

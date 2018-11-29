@@ -1,16 +1,18 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.IntakeControl;
+import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
+import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
+import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
-@Autonomous(name="VisionOnlyAuto", group="LinearOpMode")
-public class VisionOnlyAuto extends CoreAuto {
+@Autonomous(name="VisionMarkerAuto", group="LinearOpMode")
+public class VisionMarkerAuto extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();

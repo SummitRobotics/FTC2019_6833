@@ -1,16 +1,19 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import org.firstinspires.ftc.teamcode.autonomous.CoreAuto;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.IntakeControl;
+import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
 import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
+import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
-@Autonomous(name="VisionOnlyAuto", group="LinearOpMode")
-public class VisionOnlyAuto extends CoreAuto {
+@Autonomous(name="MarkerCraterAuto", group="LinearOpMode")
+public class MarkerCraterAuto extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
@@ -18,20 +21,15 @@ public class VisionOnlyAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new SampleDetection(1, 3, 2, 3));
-
-        // Left Path
-        path.add(new MoveByEncoder(0.62, 0.2, MoveByEncoder.TURN, 2));
-
-        // Right Path
-        path.add(new MoveByEncoder(-0.62, -0.2, MoveByEncoder.TURN, 1));
-
-        // Center and End
         path.add(new IntakeControl(-1, 1));
-        path.add(new MoveByEncoder(37, 0.2, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(50, 0.2, MoveByEncoder.FORWARD, 1));
 
         path.add(new IntakeControl(0, 1));
-        path.add(new MoveByEncoder(-10, -0.2, MoveByEncoder.FORWARD, END));
+        path.add(new MarkerServo(1.0, 1));
+        path.add(new WaitForTime(1000, 1));
+        path.add(new MoveByEncoder(-10, -0.2, MoveByEncoder.FORWARD, 1));
+        path.add(new MarkerServo(0.5, 1));
+        path.add(new WaitForTime(1000, END));
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");
