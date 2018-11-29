@@ -27,7 +27,8 @@ public class MarkerOnlyAuto extends CoreAuto {
         path.add(new IntakeControl(0, 1));
         path.add(new MoveByEncoder(-1.8, -0.2, MoveByEncoder.TURN, 1));
         path.add(new MarkerServo(1.0, 1));
-        path.add(new WaitForTime(2000, 1));
+        path.add(new WaitForTime(1000, 1));
+        path.add(new MoveByEncoder(-10, -0.2, MoveByEncoder.FORWARD, 1));
         path.add(new MarkerServo(0.5, 1));
         path.add(new WaitForTime(1000, END));
 
