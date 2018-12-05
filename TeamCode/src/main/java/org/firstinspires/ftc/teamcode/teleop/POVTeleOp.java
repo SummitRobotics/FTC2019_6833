@@ -40,6 +40,8 @@ public class POVTeleOp extends OpMode{
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
+        drive = Math.log(drive + .1) + 1;
+
         double turn = gamepad1.left_stick_x;
 
         // Set power variables

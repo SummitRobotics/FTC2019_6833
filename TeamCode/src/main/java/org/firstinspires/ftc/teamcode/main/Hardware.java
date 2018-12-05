@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.main;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,6 +13,7 @@ public class Hardware {
     public DcMotor liftMotor = null;
     public DcMotor intakeMotor = null;
     public Servo markerDrop = null;
+    public BNO055IMU gyro = null;
 
     // Prepare variables for encoder use
     // http://www.revrobotics.com/content/docs/Encoder-Guide.pdf
@@ -44,6 +47,18 @@ public class Hardware {
         liftMotor = this.hardwareMap.get(DcMotor.class, "liftMotor");
         intakeMotor = this.hardwareMap.get(DcMotor.class, "intakeMotor");
         markerDrop = this.hardwareMap.get(Servo.class, "markerDrop");
+
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+
+        parameters.mode                = BNO055IMU.SensorMode.IMU;
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.loggingEnabled      = false;
+
+        gyro = hardwareMap.get(BNO055IMU.class, "gyro");
+
+        gyro.initialize(parameters);
+
 
         // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.REVERSE);

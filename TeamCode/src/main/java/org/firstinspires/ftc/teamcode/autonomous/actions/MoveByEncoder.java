@@ -10,7 +10,6 @@ public class MoveByEncoder extends CoreAction {
     private double speed;
     private int mode, ticks;
     private int nextPos;
-    private Telemetry telemetry;
 
     // Direction variables
     public static final int FORWARD = 1,  TURN = -1;
@@ -33,7 +32,6 @@ public class MoveByEncoder extends CoreAction {
     public void actionInit(HardwareMap hardwareMap, Telemetry telemetry) {
 
         robot.init(hardwareMap);
-        this.telemetry = telemetry;
 
         // Prepare motors for encoder movement
         robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
@@ -54,10 +52,6 @@ public class MoveByEncoder extends CoreAction {
             return nextPos;
         }
 
-        telemetry.addData("Drive Left:", "Running to: " + ticks +
-                ", Running at: " + robot.leftDrive.getCurrentPosition());
-        telemetry.addData("Drive Right:", "Running to: " + ticks * mode +
-                ", Running at: " + robot.rightDrive.getCurrentPosition());
         return 0;
     }
 
