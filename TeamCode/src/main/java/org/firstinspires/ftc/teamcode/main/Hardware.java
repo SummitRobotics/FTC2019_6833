@@ -17,7 +17,7 @@ public class Hardware {
     // Prepare variables for encoder use
     // http://www.revrobotics.com/content/docs/Encoder-Guide.pdf
     private final int HD_HEX_REV_COUNTS = 1120; // 1120 for 40:1, 560 for 20:1
-    private final double DRIVE_GEAR_RATIO = 15.0/40.0; // WheelGear / MotorGear
+    private final double DRIVE_GEAR_RATIO = 15.0/26.0; // WheelGear / MotorGear
     private final double WHEEL_CIRCUMFERENCE = 3.543 * Math.PI;
     public final double ROBOT_WIDTH = 13;
 

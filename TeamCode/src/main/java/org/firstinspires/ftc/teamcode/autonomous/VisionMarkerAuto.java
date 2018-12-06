@@ -23,14 +23,18 @@ public class VisionMarkerAuto extends CoreAuto {
         path.add(new SampleDetection(1, 3, 2, 3));
 
         // Left Path
-        path.add(new MoveByEncoder(0.62, 0.2, MoveByEncoder.TURN, 2));
+        path.add(new MoveByEncoder(1, 0.3, MoveByEncoder.TURN, 2));
+        path.add(new IntakeControl(-1, 1));
+        path.add(new MoveByEncoder(40, 0.3, MoveByEncoder.FORWARD, 1));
 
         // Right Path
-        path.add(new MoveByEncoder(-0.62, -0.2, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(-1, -0.3, MoveByEncoder.TURN, 1));
+        path.add(new IntakeControl(-1, 1));
+        path.add(new MoveByEncoder(40, 0.3, MoveByEncoder.FORWARD, 1));
 
         // Center and End
         path.add(new IntakeControl(-1, 1));
-        path.add(new MoveByEncoder(37, 0.2, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(40, 0.3, MoveByEncoder.FORWARD, 1));
 
         path.add(new IntakeControl(0, 1));
         path.add(new MoveByEncoder(-10, -0.2, MoveByEncoder.FORWARD, END));

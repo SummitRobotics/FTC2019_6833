@@ -21,15 +21,15 @@ public class VisionOnlyAuto extends CoreAuto {
         path.add(new SampleDetection(1, 3, 2, 3));
 
         // Left Path
-        path.add(new MoveByEncoder(0.62, 0.2, MoveByEncoder.TURN, 2));
+        path.add(new MoveByEncoder(0.64, 0.2, MoveByEncoder.TURN, 2));
 
         // Right Path
-        path.add(new MoveByEncoder(-0.62, -0.2, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(-0.64, -0.2, MoveByEncoder.TURN, 1));
 
         // Center and End
-        path.add(new MoveByEncoder(37, 0.2, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(24, 0.2, MoveByEncoder.FORWARD, END));
 
-        path.add(new MoveByEncoder(-10, -0.2, MoveByEncoder.FORWARD, END));
+        //path.add(new MoveByEncoder(-5, -0.2, MoveByEncoder.FORWARD, END));
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");
