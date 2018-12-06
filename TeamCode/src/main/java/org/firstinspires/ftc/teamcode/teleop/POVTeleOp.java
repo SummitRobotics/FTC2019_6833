@@ -40,7 +40,7 @@ public class POVTeleOp extends OpMode{
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
-        drive = Math.log(drive + .1) + 1;
+        drive = logPower(drive);
 
         double turn = gamepad1.left_stick_x;
 
@@ -71,5 +71,14 @@ public class POVTeleOp extends OpMode{
 
     @Override
     public void stop() { telemetry.addData("Status", "Stopped"); }
+
+    private double logPower(double power) {
+
+        if (power >= 0) {
+            return 0.96 * Math.log10(power + 0.1) + 0.96;
+        } else {
+            return -0.96 * Math.log10(-power + 0.1) - 0.96;
+        }
+    }
 
 }

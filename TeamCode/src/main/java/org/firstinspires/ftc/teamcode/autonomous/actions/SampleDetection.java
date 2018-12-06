@@ -60,6 +60,7 @@ public class SampleDetection extends CoreAction {
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
                 telemetry.addData("# Object Detected", updatedRecognitions.size());
+                telemetry.update();
 
                 // Check if 3 minerals have been detected
                 if (updatedRecognitions.size() == 3) {
