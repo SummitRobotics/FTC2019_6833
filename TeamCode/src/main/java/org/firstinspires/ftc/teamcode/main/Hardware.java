@@ -50,6 +50,5 @@ public class Hardware {
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        markerDrop.setPosition(0.5);
     }
 }

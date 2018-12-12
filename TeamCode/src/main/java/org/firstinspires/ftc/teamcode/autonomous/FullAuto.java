@@ -21,9 +21,11 @@ public class FullAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
+        path.add(new MarkerServo(0.5,1));
+
         path.add(new Lift(3.5, 1, 1));
 
-        path.add(new SampleDetection(1, 8, 13, 8));
+        path.add(new SampleDetection(1, 10, 17, 10));
 
         // Left path
         path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
@@ -31,23 +33,29 @@ public class FullAuto extends CoreAuto {
         path.add(new MoveByEncoder(30, 0.4, MoveByEncoder.FORWARD, 1));
         path.add(new MoveByEncoder(-2.2, 0.4, MoveByEncoder.TURN, 1));
         path.add(new MoveByEncoder(35, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MarkerServo(0.0,1));
+        path.add(new WaitForTime(1, 1));
         path.add(new MoveByEncoder(-2, 0.4, MoveByEncoder.TURN, 1));
         path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
 
         // Center
-        path.add(new MoveByEncoder(45, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-2.2, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(20, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-1, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(50, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MarkerServo(0.0,1));
+        path.add(new WaitForTime(1, 1));
+        path.add(new MoveByEncoder(-2.0, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(15, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(-1.1, 0.4, MoveByEncoder.TURN, 1));
         path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
 
         // Right
         path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
         path.add(new MoveByEncoder(-1.2, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(30, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(35, 0.4, MoveByEncoder.FORWARD, 1));
         path.add(new MoveByEncoder(2.2, 0.4, MoveByEncoder.TURN, 1));
         path.add(new MoveByEncoder(20, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-80, -0.4, MoveByEncoder.FORWARD, END));
+        path.add(new MarkerServo(0.0,1));
+        path.add(new WaitForTime(1, 1));
+        path.add(new MoveByEncoder(-80, -0.2, MoveByEncoder.FORWARD, END));
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");
