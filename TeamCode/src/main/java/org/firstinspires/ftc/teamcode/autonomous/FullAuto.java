@@ -36,9 +36,9 @@ public class FullAuto extends CoreAuto {
 
         // Center
         path.add(new MoveByEncoder(45, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-2.5, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(25, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-0.8, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(-2.2, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(20, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(-1, 0.4, MoveByEncoder.TURN, 1));
         path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
 
         // Right

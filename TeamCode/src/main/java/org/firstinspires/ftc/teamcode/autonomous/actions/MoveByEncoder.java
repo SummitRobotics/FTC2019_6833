@@ -36,7 +36,7 @@ public class MoveByEncoder extends CoreAction {
         // Prepare motors for encoder movement
         leftTarget = robot.leftDrive.getCurrentPosition() + ticks;
         rightTarget = robot.rightDrive.getCurrentPosition() + (mode * ticks);
-        
+
         robot.leftDrive.setTargetPosition(leftTarget);
         robot.rightDrive.setTargetPosition(rightTarget);
 

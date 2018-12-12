@@ -49,6 +49,8 @@ public abstract class CoreAuto extends LinearOpMode{
 
                 // End the program if runtime exceeds 5 seconds
                 if (runtime.seconds() > 5) {
+                    telemetry.addData("Failed","why " + path.get(currentAction).nextPos);
+                    telemetry.update();
                     nextAction = path.get(currentAction).nextPos;
                 }
             }
