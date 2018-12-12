@@ -24,7 +24,7 @@ public class WaitForTime extends CoreAction {
     @Override
     public int run() {
 
-        if (runtime.time() > time) {
+        if (runtime.seconds() > time) {
             return nextPos;
         }
 
