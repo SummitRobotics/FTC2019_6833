@@ -24,7 +24,9 @@ public class WaitAndServoTest extends LinearOpMode {
 
         runtime.reset();
 
-        waitForTime(10);
+        turnServo(0);
+
+        waitForTime(5);
 
         turnServo(1);
     }

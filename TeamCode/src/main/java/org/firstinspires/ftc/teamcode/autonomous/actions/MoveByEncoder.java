@@ -9,7 +9,7 @@ public class MoveByEncoder extends CoreAction {
 
     private double speed;
     private int mode, ticks;
-    private int nextPos;
+    private int nextPos, leftTarget, rightTarget;
 
     // Direction variables
     public static final int FORWARD = 1,  TURN = -1;
@@ -34,8 +34,11 @@ public class MoveByEncoder extends CoreAction {
         robot.init(hardwareMap);
 
         // Prepare motors for encoder movement
-        robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
-        robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() + (mode * ticks));
+        leftTarget = robot.leftDrive.getCurrentPosition() + ticks;
+        rightTarget = robot.rightDrive.getCurrentPosition() + (mode * ticks);
+        
+        robot.leftDrive.setTargetPosition(leftTarget);
+        robot.rightDrive.setTargetPosition(rightTarget);
 
         // Turn On RUN_TO_POSITION
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -48,7 +51,9 @@ public class MoveByEncoder extends CoreAction {
         robot.leftDrive.setPower(speed);
         robot.rightDrive.setPower(mode * speed);
 
-        if ( !robot.leftDrive.isBusy() && !robot.rightDrive.isBusy() ) {
+        if ( ((robot.leftDrive.getCurrentPosition() + .02 > leftTarget) && (robot.leftDrive.getCurrentPosition() - .02 < leftTarget))
+                || ((robot.leftDrive.getCurrentPosition() + .02 > leftTarget) && (robot.leftDrive.getCurrentPosition() - .02 < leftTarget))) {
+
             return nextPos;
         }
 
