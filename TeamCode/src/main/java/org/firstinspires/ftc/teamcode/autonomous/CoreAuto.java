@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.sun.tools.javac.code.Attribute;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
+import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
 import java.util.ArrayList;
@@ -48,8 +50,8 @@ public abstract class CoreAuto extends LinearOpMode{
                 nextAction = path.get(currentAction).run();
 
                 // End the program if runtime exceeds 5 seconds
-                if (runtime.seconds() > 5) {
-                    telemetry.addData("Failed","why " + path.get(currentAction).nextPos);
+                if (runtime.seconds() > 5 && !(path.get(currentAction) instanceof WaitForTime)) {
+                    telemetry.addData("Failed","Next Position: " + path.get(currentAction).nextPos);
                     telemetry.update();
                     nextAction = path.get(currentAction).nextPos;
                 }

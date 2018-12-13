@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.IntakeControl;
+import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
-import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
 
 import java.util.ArrayList;
 
-@Autonomous(name="VisionOnlyAuto", group="LinearOpMode")
-public class VisionOnlyAuto extends CoreAuto {
+@Autonomous(name="LandOnlyAuto", group="LinearOpMode")
+public class LandOnlyAuto extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
@@ -18,18 +17,9 @@ public class VisionOnlyAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new SampleDetection(1, 3, 2, 3));
+        path.add(new Lift(3.5, 1, 1));
+        path.add(new MoveByEncoder(0.5, 0.2, MoveByEncoder.TURN, END));
 
-        // Left Path
-        path.add(new MoveByEncoder(0.64, 0.2, MoveByEncoder.TURN, 2));
-
-        // Right Path
-        path.add(new MoveByEncoder(-0.64, -0.2, MoveByEncoder.TURN, 1));
-
-        // Center and End
-        path.add(new MoveByEncoder(24, 0.2, MoveByEncoder.FORWARD, END));
-
-        //path.add(new MoveByEncoder(-5, -0.2, MoveByEncoder.FORWARD, END));
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");

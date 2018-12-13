@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.IntakeControl;
+import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
-import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
+import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
+
 import java.util.ArrayList;
 
 @Autonomous(name="DepotSideAuto", group="LinearOpMode")
@@ -17,43 +19,42 @@ public class DepotSideAuto extends CoreAuto {
 
     @Override
     public void runOpMode() {
-
         // Add paths for autonomous
-        // Land
-        //path.add(new Lift(1, 0.5, 1));
+        path.add(new MarkerServo(0.5,1));
 
-        // Identify gold mineral and select path
-        path.add(new IntakeControl(0.9, 1));
+        path.add(new Lift(3.5, 1, 1));
 
-        path.add(new SampleDetection(1, 6, 10, 6));
+        path.add(new SampleDetection(1, 10, 17, 10));
 
-        // Left Path
-        path.add(new MoveByEncoder(-0.62, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(37, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(1.35,0.4, MoveByEncoder.TURN, 1));
+        // Left path
+        path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(1.1, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(30, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(-2.2, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(38, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MarkerServo(0.0,1));
+        path.add(new WaitForTime(1, 1));
+        path.add(new MoveByEncoder(-1.8, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
+
+        // Center
+        path.add(new MoveByEncoder(50, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MarkerServo(0.0,1));
+        path.add(new WaitForTime(1, 1));
+        path.add(new MoveByEncoder(-2.0, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(15, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(-1.1, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
+
+        // Right
+        path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(-1.1, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(35, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(2.2, 0.4, MoveByEncoder.TURN, 1));
         path.add(new MoveByEncoder(25, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MarkerServo(1, 1));
-        path.add(new MoveByEncoder(1.6, 0.4, MoveByEncoder.TURN, 4));
-
-        // Center Path
-        path.add(new MoveByEncoder(51.18147, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MarkerServo(1,1));
-        path.add(new MoveByEncoder(2, 0.4, MoveByEncoder.TURN, 1));
-
-        // Final Move for Left and Center Paths
-        path.add(new MoveByEncoder(75, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new IntakeControl(0, END));
-
-        // Right Path
-        path.add(new MoveByEncoder(0.3759613, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(40.731678, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-0.7808528, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(20.248219, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MarkerServo(1,1));
-        path.add(new MoveByEncoder(-0.4619584, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(-69.319824, 0.4, MoveByEncoder.FORWARD, 1));
-
-        path.add(new IntakeControl(0, END));
+        path.add(new MarkerServo(0.0,1));
+        path.add(new WaitForTime(1, 1));
+        path.add(new MoveByEncoder(-80, -0.2, MoveByEncoder.FORWARD, END));
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");
