@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
 import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
@@ -21,8 +20,6 @@ public class DepotSideAuto extends CoreAuto {
     public void runOpMode() {
         // Add paths for autonomous
         path.add(new MarkerServo(0.5,1));
-
-        path.add(new Lift(3.5, 1, 1));
 
         path.add(new SampleDetection(1, 10, 17, 10));
 

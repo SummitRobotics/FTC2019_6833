@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class LandOnlyAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new Lift(3.5, 1, 1));
         path.add(new MoveByEncoder(0.5, 0.2, MoveByEncoder.TURN, END));
 
 

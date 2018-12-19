@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -35,38 +36,49 @@ public class POVTeleOp extends OpMode{
         // Setup a variable for each drive wheel to save power level for telemetry
         double leftPower;
         double rightPower;
-        double liftPower;
-        double intakePower;
+        double frontLegPower;
+        double backLegPower;
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
-        drive = logPower(drive);
-
+        drive = expPower(drive);
         double turn = gamepad1.left_stick_x;
 
         // Set power variables
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
         rightPower = Range.clip(drive - turn, -1.0, 1.0);
-        liftPower = Range.clip(-gamepad1.right_stick_y, -1.0, 1.0);
+
+        if (gamepad1.left_bumper) {
+            frontLegPower = gamepad1.right_stick_y;
+            backLegPower = 0;
+        } else if (gamepad1.right_bumper) {
+            backLegPower = gamepad1.right_stick_y;
+            frontLegPower = 0;
+        } else {
+            frontLegPower = gamepad1.right_stick_y;
+            backLegPower = gamepad1.right_stick_y;
+        }
 
         if (gamepad1.a) {
-            intakePower = 1;
+            robot.frontIntake.setDirection(Servo.Direction.FORWARD);
+            robot.backIntake.setDirection(Servo.Direction.REVERSE);
         } else if (gamepad1.b) {
-            intakePower = -1;
+            robot.frontIntake.setDirection(Servo.Direction.REVERSE);
+            robot.backIntake.setDirection(Servo.Direction.FORWARD);
         } else {
-            intakePower = 0;
+            robot.frontIntake.setPosition(0.5);
+            robot.backIntake.setPosition(0.5);
         }
 
         // Send calculated power to hardware
         robot.leftDrive.setPower(leftPower);
         robot.rightDrive.setPower(rightPower);
-        robot.liftMotor.setPower(liftPower);
-        robot.intakeMotor.setPower(intakePower);
+        robot.frontLeg.setPower(frontLegPower);
+        robot.backLeg.setPower(backLegPower);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-        telemetry.addData("Lift", liftPower);
     }
 
     @Override
@@ -79,6 +91,10 @@ public class POVTeleOp extends OpMode{
         } else {
             return -0.96 * Math.log10(-power + 0.1) - 0.96;
         }
+    }
+
+    private double expPower(double power) {
+        return (power * power) * (Math.abs(power) / power);
     }
 
 }

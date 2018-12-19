@@ -6,11 +6,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Hardware {
     // Declare Hardware members.
-    public DcMotor leftDrive = null;
-    public DcMotor rightDrive = null;
-    public DcMotor liftMotor = null;
-    public DcMotor intakeMotor = null;
-    public Servo markerDrop = null;
+    public DcMotor leftDrive;
+    public DcMotor rightDrive;
+    public DcMotor frontLeg;
+    public DcMotor backLeg;
+    public Servo frontIntake;
+    public Servo backIntake;
+    public Servo markerDrop;
 
     // Prepare variables for encoder use
     // http://www.revrobotics.com/content/docs/Encoder-Guide.pdf
@@ -25,8 +27,8 @@ public class Hardware {
     public final int DRIVE_COUNTS_PER_RADIAN = (int) -(ROBOT_WIDTH / 2 * DRIVE_COUNTS_PER_INCH);
 
     private final double HEX_CORE_REV_COUNTS = 288;
-    private final double LIFT_GEAR_RATIO = 1; // This is < 1.0 if geared up
-    public final double LIFT_COUNTS_PER_ROT = (HEX_CORE_REV_COUNTS * LIFT_GEAR_RATIO);
+    private final double LEG_GEAR_RATIO = 1; // This is < 1.0 if geared up
+    public final double LEG_COUNTS_PER_ROT = (HEX_CORE_REV_COUNTS * LEG_GEAR_RATIO);
 
     // Local opmode hardware map
     private HardwareMap hardwareMap = null;
@@ -41,14 +43,16 @@ public class Hardware {
         //Init hardware
         leftDrive = this.hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = this.hardwareMap.get(DcMotor.class, "rightDrive");
-        liftMotor = this.hardwareMap.get(DcMotor.class, "liftMotor");
-        intakeMotor = this.hardwareMap.get(DcMotor.class, "intakeMotor");
+        frontLeg = this.hardwareMap.get(DcMotor.class, "frontLeg");
+        backLeg = this.hardwareMap.get(DcMotor.class, "backLeg");
+        frontIntake = this.hardwareMap.get(Servo.class, "frontIntake");
+        backIntake = this.hardwareMap.get(Servo.class, "backIntake");
         markerDrop = this.hardwareMap.get(Servo.class, "markerDrop");
 
         // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
-        liftMotor.setDirection(DcMotor.Direction.FORWARD);
-        liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeg.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeg.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }

@@ -3,11 +3,9 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.Lift;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
 import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
-import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
@@ -21,8 +19,6 @@ public class CraterSideAuto extends CoreAuto {
     public void runOpMode() {
         // Add paths for autonomous
         path.add(new MarkerServo(0.5,1));
-
-        path.add(new Lift(3.5, 1, 1));
 
         path.add(new SampleDetection(1, 4, 5, 4));
 
