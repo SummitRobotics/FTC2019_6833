@@ -52,6 +52,7 @@ public class POVTeleOp extends OpMode{
         robot.leftDrive.setPower(leftPower);
         robot.rightDrive.setPower(rightPower);
         robot.liftMotor.setPower(liftPower);
+        runIntake();
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -69,6 +70,21 @@ public class POVTeleOp extends OpMode{
         } else {
             return -0.96 * Math.log10(-power + 0.1) - 0.96;
         }
+    }
+
+    private void runIntake(){
+        if(gamepad1.left_bumper){
+            robot.intake1.setPower(1);
+            robot.intake2.setPower(-1);
+        }
+        else if(gamepad1.right_bumper){
+            robot.intake1.setPower(-1);
+            robot.intake2.setPower(1);
+        }
+        else{
+
+        }
+
     }
 
 }

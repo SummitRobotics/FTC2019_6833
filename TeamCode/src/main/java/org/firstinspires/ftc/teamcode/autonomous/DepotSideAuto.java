@@ -20,7 +20,8 @@ public class DepotSideAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new MarkerServo(0.5,1));
+
+        path.add(new Lift(3.5, 1, 1));
 
         //path.add(new Lift(3.5, 1, 1));
 
@@ -33,11 +34,13 @@ public class DepotSideAuto extends CoreAuto {
         path.add(new MoveByEncoder(0.9, 0.4, MoveByEncoder.LEFT, 1));
         path.add(new MoveByEncoder(34, 0.4, MoveByEncoder.FORWARD, 1));
         path.add(new MoveByEncoder(1.59, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MarkerServo(0.5,1));
         path.add(new MoveByEncoder(-80, -0.4, MoveByEncoder.FORWARD, END));
 
         // Center path
         path.add(new MoveByEncoder(57, 0.4, MoveByEncoder.FORWARD, 1));
         path.add(new MoveByEncoder(1.2, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MarkerServo(0.5,1));
         path.add(new MoveByEncoder(-80, 0.4, MoveByEncoder.FORWARD, END));
 
         // Right Path
@@ -46,6 +49,7 @@ public class DepotSideAuto extends CoreAuto {
         path.add(new MoveByEncoder(26.5, 0.4, MoveByEncoder.FORWARD, 1));
         path.add(new MoveByEncoder(0.9, 0.4, MoveByEncoder.RIGHT, 1));
         path.add(new MoveByEncoder(34, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MarkerServo(0.5,1));
         path.add(new MoveByEncoder(-80, -0.4, MoveByEncoder.FORWARD, END));
 
 

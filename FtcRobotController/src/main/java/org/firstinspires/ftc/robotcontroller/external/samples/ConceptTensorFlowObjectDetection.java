@@ -68,7 +68,7 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
      */
-    private static final String VUFORIA_KEY = "";
+    private static final String VUFORIA_KEY = " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
@@ -127,9 +127,9 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
                         }
                         if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                           if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
-                            telemetry.addData("Gold Mineral Position", "Right");
-                          } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                             telemetry.addData("Gold Mineral Position", "Left");
+                          } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
+                            telemetry.addData("Gold Mineral Position", "Right");
                           } else {
                             telemetry.addData("Gold Mineral Position", "Center");
                           }
