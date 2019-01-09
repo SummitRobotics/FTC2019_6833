@@ -11,15 +11,26 @@ import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
+/**
+ * The autonomous to be used when the robot is on the crater side of the field. A simple program that
+ * will land, use the phone camera to scan for minerals, drive over the gold mineral, then drive into
+ * the crater.
+ */
 @Autonomous(name="CraterSideAuto", group="LinearOpMode")
 public class CraterSideAuto extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
 
+    /**
+     * Prepare paths to land, use the phone camera to scan for minerals, go over the gold
+     * mineral, then drive into the crater.
+     */
     @Override
     public void runOpMode() {
         // Add paths for autonomous
+        telemetry.addData("Ss", "awefawefd");
+        telemetry.update();
         path.add(new MarkerServo(0.5,1));
 
         path.add(new Lift(3.5, 1, 1));

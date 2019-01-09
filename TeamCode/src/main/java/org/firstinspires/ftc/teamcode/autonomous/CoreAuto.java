@@ -2,27 +2,30 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.sun.tools.javac.code.Attribute;
-
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
 import java.util.ArrayList;
 
-// Abstract class to create other autonomous programs
-public abstract class CoreAuto extends LinearOpMode{
+/**
+ * CoreAuto is an abstract class that is used to create new autonomous programs and run through their
+ * actions. A list of actions will be run through using the runPath method within this class.
+ */
+abstract class CoreAuto extends LinearOpMode{
 
-    protected final int END = -1;
-    Hardware robot = new Hardware();
+    final int END = -1;
+    /**
+     * The instance of Hardware to be used in all actions.
+     */
+    private Hardware robot = new Hardware();
 
     /**
-     * runPath method will run through all paths in an autonomous program. Each path will be
-     * initialized, then run through until completion
-     * @param path The list of paths to be run through
+     * The runPath method will run through all paths in an autonomous program. Each path will be
+     * initialized, then run through until completion.
+     * @param path The list of paths to be run through.
      */
-
-    protected void runPath(ArrayList<CoreAction> path) {
+    void runPath(ArrayList<CoreAction> path) {
 
         robot.init(hardwareMap);
 
@@ -41,7 +44,7 @@ public abstract class CoreAuto extends LinearOpMode{
             nextAction = 0;
 
             // Initialize current action
-            path.get(currentAction).actionInit(hardwareMap, telemetry);
+            path.get(currentAction).actionInit(robot, telemetry);
 
             // Continue looping through run method until action completes and doesn't return 0
             runtime.reset();
@@ -62,6 +65,7 @@ public abstract class CoreAuto extends LinearOpMode{
 
         } while (nextAction != END && opModeIsActive());
 
+        // Stop all motion.
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
         robot.liftMotor.setPower(0);

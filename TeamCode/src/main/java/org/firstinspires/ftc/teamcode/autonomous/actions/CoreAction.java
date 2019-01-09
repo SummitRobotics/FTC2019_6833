@@ -1,21 +1,23 @@
 package org.firstinspires.ftc.teamcode.autonomous.actions;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
-// Interface to create new action classes
+/**
+ * An abstract class used to create new actions. All actions will extend this class. This prepares
+ * the telemetry and robot variables, and creates three abstract methods to be used in each action.
+ */
 public abstract class CoreAction {
 
-    Hardware robot = new Hardware();
+    Hardware robot;
     public int nextPos = -1;
 
     /**
-     * Method to run once at start of action use
-     * @param hardwareMap For using hardware within actions
-     * @param telemetry For updating telemetry within actions
+     * Method to run once at start of action use.
+     * @param robot The robot to send action to.
+     * @param telemetry For updating telemetry within actions.
      */
-    public abstract void actionInit(HardwareMap hardwareMap, Telemetry telemetry);
+    public abstract void actionInit(Hardware robot, Telemetry telemetry);
 
     /**
      * Method to be called until action is complete
