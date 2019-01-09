@@ -7,16 +7,6 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
-/**
- * POVTeleOp is the main teleop class. This opmode uses the 5 main FTC functions in its operation: init, init_loop,
- * start, loop, and stop. The main features of this teleop program are as follows:<br>
- * Set drive motor power based on triggers for forward movement and joystick for turning.<br>
- * Adjust drive motor power using either the logPower or exPower functions (explained later).<br>
- * Set lift power using joystick.<br><br>
- *
- * This autonomous program has added features that give the robot more functionality and efficiency,
- * while still retaining simple and intuitive controls.
- */
 @TeleOp(name="POVTeleOp", group="Iterative Opmode")
 public class POVTeleOp extends OpMode{
 
@@ -49,7 +39,7 @@ public class POVTeleOp extends OpMode{
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
-        drive = exPower(drive);
+        drive = logPower(drive);
 
         double turn = gamepad1.left_stick_x;
 
@@ -72,13 +62,6 @@ public class POVTeleOp extends OpMode{
     @Override
     public void stop() { telemetry.addData("Status", "Stopped"); }
 
-    /**
-     * This function is used to take the power from a controller input and return a logarithmic function
-     * of this value. This function gives the robot more sensitivity at higher powers, and increases
-     * acceleration.
-     * @param power The controller input to be used.
-     * @return The output of the logarithmic function.
-     */
     private double logPower(double power) {
 
         if (power >= 0) {
@@ -86,17 +69,6 @@ public class POVTeleOp extends OpMode{
         } else {
             return -0.96 * Math.log10(-power + 0.1) - 0.96;
         }
-    }
-
-    /**
-     * This function is used to take the power from a joystick input and return an exponential function
-     * of this value. This function gives the robot more sensitivity at lower powers, and increases
-     * acceleration at higher powers.
-     * @param power The controller input to be used.
-     * @return The output of the exponential function.
-     */
-    private double exPower(double power) {
-        return power * power * (power / Math.abs(power));
     }
 
 }

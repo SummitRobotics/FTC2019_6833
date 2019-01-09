@@ -11,21 +11,12 @@ import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
-/**
- * The autonomous to be used when the robot is on the depot side of the field. A program that
- * will land, use the phone camera to scan for minerals, drive over the gold mineral, drop the team
- * marker in the depot, then drive into the crater, then move into the crater.
- */
 @Autonomous(name="DepotSideAuto", group="LinearOpMode")
 public class DepotSideAuto extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
 
-    /**
-     * Prepare paths to land, use the phone camera to scan for minerals, drive over the gold mineral,
-     * drop the team marker in the depot, then drive into the crater, then move into the crater.
-     */
     @Override
     public void runOpMode() {
         // Add paths for autonomous

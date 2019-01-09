@@ -11,20 +11,12 @@ import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
-/**
- * An autonomous program to be used when working with team Robotics Quasar Alliance to prevent our
- * robots from colliding during autonomous. The robot will run a path similar to that of the DepotSideAuto
- * , however, it will wait 10 seconds first to prevent collision with another team.
- */
 @Autonomous(name="QuasarDepot", group="LinearOpMode")
 public class QuasarDepot extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
 
-    /**
-     * Prepare paths to wait, then run a normal autonomous.
-     */
     @Override
     public void runOpMode() {
         // Add paths for autonomous
