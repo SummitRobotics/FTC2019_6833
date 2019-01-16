@@ -6,10 +6,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Hardware {
     // Declare Hardware members.
-    public DcMotor leftDrive;
-    public DcMotor rightDrive;
+    public DcMotor leftFrontDrive;
+    public DcMotor rightFrontDrive;
+    public DcMotor leftBackDrive;
+    public DcMotor rightBackDrive;
     public DcMotor frontLeg;
     public DcMotor backLeg;
+    public DcMotor armMotor;
     public Servo frontIntake;
     public Servo backIntake;
     public Servo markerDrop;
@@ -28,7 +31,8 @@ public class Hardware {
 
     private final double HEX_CORE_REV_COUNTS = 288;
     private final double LEG_GEAR_RATIO = 1; // This is < 1.0 if geared up
-    public final double LEG_COUNTS_PER_ROT = (HEX_CORE_REV_COUNTS * LEG_GEAR_RATIO);
+    // Todo: Check LEG_COUNTS_PER_RADIAN value.
+    public final double LEG_COUNTS_PER_RADIAN = (HD_HEX_REV_COUNTS * LEG_GEAR_RATIO);
 
     // Local opmode hardware map
     private HardwareMap hardwareMap = null;
@@ -41,17 +45,22 @@ public class Hardware {
         this.hardwareMap = hardwareMap;
 
         //Init hardware
-        leftDrive = this.hardwareMap.get(DcMotor.class, "leftDrive");
-        rightDrive = this.hardwareMap.get(DcMotor.class, "rightDrive");
+        leftFrontDrive = this.hardwareMap.get(DcMotor.class, "leftFrontDrive");
+        rightFrontDrive = this.hardwareMap.get(DcMotor.class, "rightFrontDrive");
+        leftBackDrive = this.hardwareMap.get(DcMotor.class, "leftBackDrive");
+        rightBackDrive = this.hardwareMap.get(DcMotor.class, "rightBackDrive");
         frontLeg = this.hardwareMap.get(DcMotor.class, "frontLeg");
         backLeg = this.hardwareMap.get(DcMotor.class, "backLeg");
+        armMotor = this.hardwareMap.get(DcMotor.class, "armMotor");
         frontIntake = this.hardwareMap.get(Servo.class, "frontIntake");
         backIntake = this.hardwareMap.get(Servo.class, "backIntake");
         markerDrop = this.hardwareMap.get(Servo.class, "markerDrop");
 
         // Reverse the motor that runs backwards, set servo positions.
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         frontLeg.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeg.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }

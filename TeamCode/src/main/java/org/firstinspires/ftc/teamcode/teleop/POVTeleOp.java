@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.autonomous.actions.LegControl;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
 @TeleOp(name="POVTeleOp", group="Iterative Opmode")
@@ -13,6 +14,8 @@ public class POVTeleOp extends OpMode{
 
     private Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
+    private LegControl centerLegs = new LegControl(Math.PI, Math.PI, 0.9, 1);
+    private boolean centering = false;
 
     @Override
     public void init() {
@@ -71,8 +74,10 @@ public class POVTeleOp extends OpMode{
         }
 
         // Send calculated power to hardware
-        robot.leftDrive.setPower(leftPower);
-        robot.rightDrive.setPower(rightPower);
+        robot.leftFrontDrive.setPower(leftPower);
+        robot.leftBackDrive.setPower(leftPower);
+        robot.rightFrontDrive.setPower(rightPower);
+        robot.rightBackDrive.setPower(rightPower);
         robot.frontLeg.setPower(frontLegPower);
         robot.backLeg.setPower(backLegPower);
 
