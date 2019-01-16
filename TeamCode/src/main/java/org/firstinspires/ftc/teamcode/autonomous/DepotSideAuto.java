@@ -24,34 +24,13 @@ public class DepotSideAuto extends CoreAuto {
         path.add(new SampleDetection(1, 10, 17, 10));
 
         // Left path
-        path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(1.1, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(30, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-2.2, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(38, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MarkerServo(0.0,1));
-        path.add(new WaitForTime(1, 1));
-        path.add(new MoveByEncoder(-1.8, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
+
 
         // Center
-        path.add(new MoveByEncoder(50, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MarkerServo(0.0,1));
-        path.add(new WaitForTime(1, 1));
-        path.add(new MoveByEncoder(-2.0, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(15, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-1.1, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(80, 0.4, MoveByEncoder.FORWARD, END));
+
 
         // Right
-        path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(-1.1, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(35, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MoveByEncoder(2.2, 0.4, MoveByEncoder.TURN, 1));
-        path.add(new MoveByEncoder(25, 0.4, MoveByEncoder.FORWARD, 1));
-        path.add(new MarkerServo(0.0,1));
-        path.add(new WaitForTime(1, 1));
-        path.add(new MoveByEncoder(-80, -0.2, MoveByEncoder.FORWARD, END));
+
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");

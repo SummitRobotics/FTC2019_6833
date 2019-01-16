@@ -73,13 +73,29 @@ public class POVTeleOp extends OpMode{
             robot.backIntake.setPosition(0.5);
         }
 
+        if (gamepad1.x && !centering) {
+            centering = true;
+            centerLegs.actionInit(hardwareMap, telemetry);
+        } else if (gamepad1.x && centering) {
+            centering = false;
+            centerLegs.actionEnd();
+        }
+
         // Send calculated power to hardware
         robot.leftFrontDrive.setPower(leftPower);
         robot.leftBackDrive.setPower(leftPower);
         robot.rightFrontDrive.setPower(rightPower);
         robot.rightBackDrive.setPower(rightPower);
-        robot.frontLeg.setPower(frontLegPower);
-        robot.backLeg.setPower(backLegPower);
+
+        if (centering) {
+            if (centerLegs.run() != 0) {
+                centering = false;
+                centerLegs.actionEnd();
+            }
+        } else {
+            robot.frontLeg.setPower(frontLegPower);
+            robot.backLeg.setPower(backLegPower);
+        }
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
