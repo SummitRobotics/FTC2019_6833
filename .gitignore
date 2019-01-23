@@ -1,28 +1,28 @@
 # built application files
-*.apk
-*.ap_
+#*.apk
+#*.ap_
 
 # Java class files
-*.class
+#*.class
 
 # generated files
-bin/
-gen/
+#bin/
+#gen/
 
 # Local configuration file (sdk path, etc)
-local.properties
+#local.properties
 
 # Windows thumbnail db
-Thumbs.db
+#Thumbs.db
 
 # OSX files
-.DS_Store
+#.DS_Store
 
 # Android Studio
-*.iml
-.idea
-.gradle
-build/
+#*.iml
+#.idea
+#.gradle
+#build/
 
-*ASUS_PC_01*
+#*ASUS_PC_01*
 
