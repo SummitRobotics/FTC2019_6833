@@ -3,15 +3,12 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
-//import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
-import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
 
-@Autonomous(name="DepotSideAuto", group="LinearOpMode")
-public class DepotSideAuto extends CoreAuto {
+@Autonomous(name="LandOnlyAuto", group="LinearOpMode")
+public class LandOnlyAuto extends CoreAuto {
 
     //Initializes action list
     private ArrayList<CoreAction> path = new ArrayList<>();
@@ -19,17 +16,7 @@ public class DepotSideAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new MarkerServo(0.5,1));
-
-        //path.add(new SampleDetection(1, 10, 17, 10));
-
-        // Left path
-
-
-        // Center
-
-
-        // Right
+        path.add(new MoveByEncoder(0.5, 0.2, MoveByEncoder.TURN, END));
 
 
         // Update telemetry

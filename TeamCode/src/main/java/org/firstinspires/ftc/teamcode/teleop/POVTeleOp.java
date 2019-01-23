@@ -2,23 +2,24 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.autonomous.actions.LegControl;
 import org.firstinspires.ftc.teamcode.main.Hardware;
 
 @TeleOp(name="POVTeleOp", group="Iterative Opmode")
 public class POVTeleOp extends OpMode{
 
-    Hardware robot = new Hardware();
+    private Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
+    private LegControl centerLegs = new LegControl(Math.PI, Math.PI, 0.9, 1);
+    private boolean centering = false;
 
     @Override
     public void init() {
-
-        telemetry.addData("Status", "Initialized");
-
-        // Initialize all hardware and servo toggles
+        // Initialize all hardware
         robot.init(hardwareMap);
 
         // Tell the driver that initialization is complete.
@@ -38,25 +39,60 @@ public class POVTeleOp extends OpMode{
         // Setup a variable for each drive wheel to save power level for telemetry
         double leftPower;
         double rightPower;
-        double liftPower;
+        double frontLegPower;
+        double backLegPower;
 
         // Get gamepad inputs
-        double drive = gamepad1.left_trigger - gamepad1.right_trigger;
+        double drive = gamepad1.right_trigger - gamepad1.left_trigger;
+        drive = expPower(drive);
         double turn = gamepad1.left_stick_x;
-        double lift =  gamepad2.left_trigger - gamepad2.right_trigger;
-
-        telemetry.addData("ButtonState",gamepad1.a);
 
         // Set power variables
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
         rightPower = Range.clip(drive - turn, -1.0, 1.0);
-        liftPower = Range.clip(lift, -1.0, 1.0);
 
+        if (gamepad1.left_bumper) {
+            frontLegPower = gamepad1.right_stick_y;
+            backLegPower = 0;
+        } else if (gamepad1.right_bumper) {
+            backLegPower = gamepad1.right_stick_y;
+            frontLegPower = 0;
+        } else {
+            frontLegPower = gamepad1.right_stick_y;
+            backLegPower = gamepad1.right_stick_y;
+        }
+
+        if (gamepad1.a) {
+            robot.intakeServo.setDirection(Servo.Direction.FORWARD);
+        } else if (gamepad1.b) {
+            robot.intakeServo.setDirection(Servo.Direction.REVERSE);
+        } else {
+            robot.intakeServo.setPosition(0.5);
+        }
+
+        if (gamepad1.x && !centering) {
+            centering = true;
+            centerLegs.actionInit(hardwareMap, telemetry);
+        } else if (gamepad1.x) {
+            centering = false;
+            centerLegs.actionEnd();
+        }
 
         // Send calculated power to hardware
-        robot.leftDrive.setPower(leftPower);
-        robot.rightDrive.setPower(rightPower);
-        robot.liftMotor.setPower(liftPower);
+        robot.leftFrontDrive.setPower(leftPower);
+        robot.leftBackDrive.setPower(leftPower);
+        robot.rightFrontDrive.setPower(rightPower);
+        robot.rightBackDrive.setPower(rightPower);
+
+        if (centering) {
+            if (centerLegs.run() != 0) {
+                centering = false;
+                centerLegs.actionEnd();
+            }
+        } else {
+            robot.frontLeg.setPower(frontLegPower);
+            robot.backLeg.setPower(backLegPower);
+        }
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -64,6 +100,20 @@ public class POVTeleOp extends OpMode{
     }
 
     @Override
-    public void stop() { }
+    public void stop() { telemetry.addData("Status", "Stopped"); }
+
+    private double logPower(double power) {
+
+        if (power >= 0) {
+            return 0.96 * Math.log10(power + 0.1) + 0.96;
+        } else {
+            return -0.96 * Math.log10(-power + 0.1) - 0.96;
+        }
+    }
+
+    private double expPower(double power) {
+        if (power == 0) { return 0; }
+        return (power * power) * (Math.abs(power) / power);
+    }
 
 }

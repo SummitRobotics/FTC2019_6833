@@ -1,28 +1,49 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import org.firstinspires.ftc.teamcode.main.Action;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
+import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
+import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
+//import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
+
+import java.util.ArrayList;
+
+@Autonomous(name="CraterSideAuto", group="LinearOpMode")
 public class CraterSideAuto extends CoreAuto {
 
+    //Initializes action list
+    private ArrayList<CoreAction> path = new ArrayList<>();
 
-    private Action[] path = new Action[4];
-
+    @Override
     public void runOpMode() {
+        // Add paths for autonomous
+        path.add(new MarkerServo(0.5,1));
 
-        robot.init(hardwareMap);
-        telemetry.addData("Status", "Initialized");    //
+        //path.add(new SampleDetection(1, 4, 5, 4));
+
+        // Left path
+        path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(1.1, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(40, 0.4, MoveByEncoder.FORWARD, END));
+
+        // Center
+        path.add(new MoveByEncoder(50, 0.4, MoveByEncoder.FORWARD, END));
+
+        // Right
+        path.add(new MoveByEncoder(10, 0.4, MoveByEncoder.FORWARD, 1));
+        path.add(new MoveByEncoder(-1.2, 0.4, MoveByEncoder.TURN, 1));
+        path.add(new MoveByEncoder(40, 0.4, MoveByEncoder.FORWARD, END));
+
+        // Update telemetry
+        telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         waitForStart();
 
         telemetry.addData("Status", "Running");
 
-        path[0] = new Action(37.061516, -4.2607856);
-        path[1] = new Action(65.446976, -12.220759);
-        path[2] = new Action(0.7, robot.markerDrop);
-        path[3] = new Action(-64.156715, -24.806803);
-
+        // Run the paths created earlier
         runPath(path);
-
     }
 }
