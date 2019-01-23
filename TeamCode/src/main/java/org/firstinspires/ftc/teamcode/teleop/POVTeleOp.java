@@ -41,39 +41,35 @@ public class POVTeleOp extends OpMode{
         double rightPower;
         double frontLegPower;
         double backLegPower;
+        double armPower;
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
         drive = expPower(drive);
-        double turn = gamepad1.left_stick_x;
+        double turn = gamepad1.right_stick_x;
 
         // Set power variables
         leftPower = Range.clip(drive + turn, -1.0, 1.0);
         rightPower = Range.clip(drive - turn, -1.0, 1.0);
-
-        if (gamepad1.left_bumper) {
-            frontLegPower = gamepad1.right_stick_y;
-            backLegPower = 0;
-        } else if (gamepad1.right_bumper) {
-            backLegPower = gamepad1.right_stick_y;
-            frontLegPower = 0;
-        } else {
-            frontLegPower = gamepad1.right_stick_y;
-            backLegPower = gamepad1.right_stick_y;
-        }
+        frontLegPower = Range.clip(gamepad2.left_stick_y, -1.0, 1.0);
+        backLegPower = Range.clip(gamepad2.right_stick_y, -1.0, 1.0);
+        armPower = Range.clip(gamepad1.left_stick_y, -1.0, 1.0);
 
         if (gamepad1.a) {
-            robot.intakeServo.setDirection(Servo.Direction.FORWARD);
+            robot.frontIntake.setPower(0.9);
+            robot.backIntake.setPower(-0.9);
         } else if (gamepad1.b) {
-            robot.intakeServo.setDirection(Servo.Direction.REVERSE);
+            robot.frontIntake.setPower(-0.9);
+            robot.backIntake.setPower(0.9);
         } else {
-            robot.intakeServo.setPosition(0.5);
+            robot.frontIntake.setPower(0.0);
+            robot.backIntake.setPower(0.0);
         }
 
-        if (gamepad1.x && !centering) {
+        if (gamepad2.a && !centering) {
             centering = true;
             centerLegs.actionInit(hardwareMap, telemetry);
-        } else if (gamepad1.x) {
+        } else if (gamepad2.a) {
             centering = false;
             centerLegs.actionEnd();
         }
@@ -83,6 +79,7 @@ public class POVTeleOp extends OpMode{
         robot.leftBackDrive.setPower(leftPower);
         robot.rightFrontDrive.setPower(rightPower);
         robot.rightBackDrive.setPower(rightPower);
+        robot.armMotor.setPower(armPower);
 
         if (centering) {
             if (centerLegs.run() != 0) {

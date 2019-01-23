@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.main;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 public class Hardware {
     // Declare Hardware members.
@@ -13,7 +14,8 @@ public class Hardware {
     public DcMotor frontLeg;
     public DcMotor backLeg;
     public DcMotor armMotor;
-    public Servo intakeServo;
+    public CRServo frontIntake;
+    public CRServo backIntake;
     public Servo markerDrop;
 
     // Prepare variables for encoder use
@@ -50,7 +52,8 @@ public class Hardware {
         frontLeg = this.hardwareMap.get(DcMotor.class, "frontLeg");
         backLeg = this.hardwareMap.get(DcMotor.class, "backLeg");
         armMotor = this.hardwareMap.get(DcMotor.class, "armMotor");
-        intakeServo = this.hardwareMap.get(Servo.class, "intakeServo");
+        frontIntake = this.hardwareMap.get(CRServo.class, "frontIntake");
+        backIntake = this.hardwareMap.get(CRServo.class, "backIntake");
         markerDrop = this.hardwareMap.get(Servo.class, "markerDrop");
 
         // Reverse the motor that runs backwards, set servo positions.

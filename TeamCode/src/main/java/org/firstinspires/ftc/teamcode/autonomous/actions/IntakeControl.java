@@ -7,11 +7,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class IntakeControl extends CoreAction {
 
-    int direction;
+    int power;
 
-    public IntakeControl(int direction, int nextPos) {
+    public IntakeControl(int power, int nextPos) {
 
-        this.direction = direction;
+        this.power = power;
         this.nextPos = nextPos;
     }
 
@@ -22,13 +22,8 @@ public class IntakeControl extends CoreAction {
 
     @Override
     public int run() {
-        if (direction == -1) {
-            robot.intakeServo.setDirection(Servo.Direction.REVERSE);
-        } else if (direction == 1) {
-            robot.intakeServo.setDirection(Servo.Direction.FORWARD);
-        } else {
-            robot.intakeServo.setPosition(0.5);
-        }
+        robot.frontIntake.setPower(power);
+        robot.backIntake.setPower(-power);
 
         return nextPos;
     }
