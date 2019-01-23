@@ -63,20 +63,17 @@ public class POVTeleOp extends OpMode{
         }
 
         if (gamepad1.a) {
-            robot.frontIntake.setDirection(Servo.Direction.FORWARD);
-            robot.backIntake.setDirection(Servo.Direction.REVERSE);
+            robot.intakeServo.setDirection(Servo.Direction.FORWARD);
         } else if (gamepad1.b) {
-            robot.frontIntake.setDirection(Servo.Direction.REVERSE);
-            robot.backIntake.setDirection(Servo.Direction.FORWARD);
+            robot.intakeServo.setDirection(Servo.Direction.REVERSE);
         } else {
-            robot.frontIntake.setPosition(0.5);
-            robot.backIntake.setPosition(0.5);
+            robot.intakeServo.setPosition(0.5);
         }
 
         if (gamepad1.x && !centering) {
             centering = true;
             centerLegs.actionInit(hardwareMap, telemetry);
-        } else if (gamepad1.x && centering) {
+        } else if (gamepad1.x) {
             centering = false;
             centerLegs.actionEnd();
         }
@@ -115,6 +112,7 @@ public class POVTeleOp extends OpMode{
     }
 
     private double expPower(double power) {
+        if (power == 0) { return 0; }
         return (power * power) * (Math.abs(power) / power);
     }
 

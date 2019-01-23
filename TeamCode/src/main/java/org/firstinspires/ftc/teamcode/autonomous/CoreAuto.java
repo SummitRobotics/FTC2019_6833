@@ -69,7 +69,6 @@ public abstract class CoreAuto extends LinearOpMode{
         robot.frontLeg.setPower(0);
         robot.backLeg.setPower(0);
         robot.armMotor.setPower(0);
-        robot.frontIntake.setPosition(0.5);
-        robot.backIntake.setPosition(0.5);
+        robot.intakeServo.setPosition(0.5);
     }
 }

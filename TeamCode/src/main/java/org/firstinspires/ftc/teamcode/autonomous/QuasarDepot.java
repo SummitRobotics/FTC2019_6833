@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MarkerServo;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
-import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
+//import org.firstinspires.ftc.teamcode.autonomous.actions.SampleDetection;
 import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class QuasarDepot extends CoreAuto {
         // Add paths for autonomous
         path.add(new MarkerServo(0.5,1));
 
-        path.add(new SampleDetection(1, 9, 14, 9));
+        //path.add(new SampleDetection(1, 9, 14, 9));
 
         // Left path
         path.add(new WaitForTime(7, 1));

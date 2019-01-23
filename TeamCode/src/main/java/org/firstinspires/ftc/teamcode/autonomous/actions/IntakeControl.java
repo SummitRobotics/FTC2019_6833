@@ -23,14 +23,11 @@ public class IntakeControl extends CoreAction {
     @Override
     public int run() {
         if (direction == -1) {
-            robot.frontIntake.setDirection(Servo.Direction.REVERSE);
-            robot.backIntake.setDirection(Servo.Direction.REVERSE);
+            robot.intakeServo.setDirection(Servo.Direction.REVERSE);
         } else if (direction == 1) {
-            robot.frontIntake.setDirection(Servo.Direction.FORWARD);
-            robot.backIntake.setDirection(Servo.Direction.FORWARD);
+            robot.intakeServo.setDirection(Servo.Direction.FORWARD);
         } else {
-            robot.frontIntake.setPosition(0.5);
-            robot.backIntake.setPosition(0.5);
+            robot.intakeServo.setPosition(0.5);
         }
 
         return nextPos;

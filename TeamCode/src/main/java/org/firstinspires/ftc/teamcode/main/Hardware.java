@@ -13,8 +13,7 @@ public class Hardware {
     public DcMotor frontLeg;
     public DcMotor backLeg;
     public DcMotor armMotor;
-    public Servo frontIntake;
-    public Servo backIntake;
+    public Servo intakeServo;
     public Servo markerDrop;
 
     // Prepare variables for encoder use
@@ -51,8 +50,7 @@ public class Hardware {
         frontLeg = this.hardwareMap.get(DcMotor.class, "frontLeg");
         backLeg = this.hardwareMap.get(DcMotor.class, "backLeg");
         armMotor = this.hardwareMap.get(DcMotor.class, "armMotor");
-        frontIntake = this.hardwareMap.get(Servo.class, "frontIntake");
-        backIntake = this.hardwareMap.get(Servo.class, "backIntake");
+        intakeServo = this.hardwareMap.get(Servo.class, "intakeServo");
         markerDrop = this.hardwareMap.get(Servo.class, "markerDrop");
 
         // Reverse the motor that runs backwards, set servo positions.
