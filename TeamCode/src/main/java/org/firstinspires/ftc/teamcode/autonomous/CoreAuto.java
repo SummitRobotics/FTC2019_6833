@@ -1,80 +1,74 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import org.firstinspires.ftc.teamcode.main.Hardware;
-import org.firstinspires.ftc.teamcode.main.Action;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.sun.tools.javac.code.Attribute;
 
-@Autonomous(name="mainAuto", group="Linear Opmode")
+import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
+import org.firstinspires.ftc.teamcode.autonomous.actions.WaitForTime;
+import org.firstinspires.ftc.teamcode.main.Hardware;
+
+import java.util.ArrayList;
+
+// Abstract class to create other autonomous programs
 public abstract class CoreAuto extends LinearOpMode{
 
-    private ElapsedTime runtime = new ElapsedTime();
+    protected final int END = -1;
     Hardware robot = new Hardware();
 
-    void runPath(Action[] path) {
+    /**
+     * runPath method will run through all paths in an autonomous program. Each path will be
+     * initialized, then run through until completion
+     * @param path The list of paths to be run through
+     */
 
-        //for (PVector move : path) {
-        for (int i = 0; i < path.length; i++) {
+    protected void runPath(ArrayList<CoreAction> path) {
 
-            Action move = path[i];
-            telemetry.addData("For #", i);
-            telemetry.update();
-            if (move.servo == null) {
-                encoderMove(0.7, move.turnInches, -1);
-                encoderMove(0.7, move.moveInches, 1);
-            } else {
+        robot.init(hardwareMap);
 
-                servoMove(move.servo, move.moveInches);
-            }
-        }
-    }
+        // variables to store the currently running action location in the list of paths and the
+        // location of the next path to run.
+        int currentAction = 0;
+        int nextAction = 0;
+        ElapsedTime runtime = new ElapsedTime();
 
-    private void encoderMove(double speed, double inches, int mode) {
+        // Loop through every action until next action == END (-1)
+        do {
 
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
+            // Increase current action by next action. Next action represents the distance between
+            // two actions
+            currentAction += nextAction;
+            nextAction = 0;
 
-            int ticks = (int)(inches * robot.DRIVE_COUNTS_PER_INCH);
+            // Initialize current action
+            path.get(currentAction).actionInit(hardwareMap, telemetry);
 
-            robot.leftDrive.setTargetPosition(robot.leftDrive.getCurrentPosition() + ticks);
-            robot.rightDrive.setTargetPosition(robot.rightDrive.getCurrentPosition() +mode * ticks);
-
-            // Turn On RUN_TO_POSITION
-            robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
+            // Continue looping through run method until action completes and doesn't return 0
             runtime.reset();
-            robot.leftDrive.setPower(speed);
-            robot.rightDrive.setPower(mode * speed);
+            while (nextAction == 0 && opModeIsActive()) {
 
-            while (((robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) &&
-                    runtime.seconds() < 5 && opModeIsActive()) {
+                nextAction = path.get(currentAction).run();
 
-                // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d", ticks,  ticks);
-                telemetry.addData("Path2",  "Running at %7d :%7d",
-                        robot.leftDrive.getCurrentPosition(),
-                        robot.rightDrive.getCurrentPosition());
-                telemetry.update();
+                // End the program if runtime exceeds 5 seconds
+                if (runtime.seconds() > 5 && !(path.get(currentAction) instanceof WaitForTime)) {
+                    telemetry.addData("Failed","Next Position: " + path.get(currentAction).nextPos);
+                    telemetry.update();
+                    nextAction = path.get(currentAction).nextPos;
+                }
             }
 
-            // Stop all motion;
-            robot.leftDrive.setPower(0);
-            robot.rightDrive.setPower(0);
+            // End current actions
+            path.get(currentAction).actionEnd();
 
-            // Turn off RUN_TO_POSITION
-            robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-    }
+        } while (nextAction != END && opModeIsActive());
 
-    private void servoMove(Servo servo, double goTo) {
-        if (opModeIsActive()) {
-            servo.setPosition(goTo);
-        }
+        robot.leftFrontDrive.setPower(0);
+        robot.rightFrontDrive.setPower(0);
+        robot.leftBackDrive.setPower(0);
+        robot.rightBackDrive.setPower(0);
+        robot.frontLeg.setPower(0);
+        robot.backLeg.setPower(0);
+        robot.armMotor.setPower(0);
+        robot.intakeServo.setPosition(0.5);
     }
 }
